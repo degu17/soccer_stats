@@ -1,0 +1,2086 @@
+{
+ "okubo": {
+  "birth": "1982-06-09",
+  "seasons": [
+   {
+    "season": "2001",
+    "club": "Cerezo Osaka",
+    "league": "J1 League",
+    "apps": 20,
+    "goals": 2,
+    "year": 2001,
+    "age": 19
+   },
+   {
+    "season": "2002",
+    "club": "Cerezo Osaka",
+    "league": "J2 League",
+    "apps": 29,
+    "goals": 18,
+    "year": 2002,
+    "age": 20
+   },
+   {
+    "season": "2003",
+    "club": "Cerezo Osaka",
+    "league": "J1 League",
+    "apps": 24,
+    "goals": 16,
+    "year": 2003,
+    "age": 21
+   },
+   {
+    "season": "2004",
+    "club": "Cerezo Osaka",
+    "league": "J1 League",
+    "apps": 22,
+    "goals": 15,
+    "year": 2004,
+    "age": 22
+   },
+   {
+    "season": "2004-05",
+    "club": "Mallorca (loan)",
+    "league": "La Liga",
+    "apps": 13,
+    "goals": 3,
+    "year": 2004,
+    "age": 22
+   },
+   {
+    "season": "2005-06",
+    "club": "Mallorca (loan)",
+    "league": "La Liga",
+    "apps": 26,
+    "goals": 2,
+    "year": 2005,
+    "age": 23
+   },
+   {
+    "season": "2006",
+    "club": "Cerezo Osaka",
+    "league": "J1 League",
+    "apps": 21,
+    "goals": 6,
+    "year": 2006,
+    "age": 24
+   },
+   {
+    "season": "2007",
+    "club": "Vissel Kobe",
+    "league": "J1 League",
+    "apps": 31,
+    "goals": 14,
+    "year": 2007,
+    "age": 25
+   },
+   {
+    "season": "2008",
+    "club": "Vissel Kobe",
+    "league": "J1 League",
+    "apps": 31,
+    "goals": 11,
+    "year": 2008,
+    "age": 26
+   },
+   {
+    "season": "2008-09",
+    "club": "VfL Wolfsburg",
+    "league": "Bundesliga",
+    "apps": 9,
+    "goals": 0,
+    "year": 2008,
+    "age": 26
+   },
+   {
+    "season": "2009",
+    "club": "Vissel Kobe",
+    "league": "J1 League",
+    "apps": 19,
+    "goals": 8,
+    "year": 2009,
+    "age": 27
+   },
+   {
+    "season": "2010",
+    "club": "Vissel Kobe",
+    "league": "J1 League",
+    "apps": 17,
+    "goals": 4,
+    "year": 2010,
+    "age": 28
+   },
+   {
+    "season": "2011",
+    "club": "Vissel Kobe",
+    "league": "J1 League",
+    "apps": 30,
+    "goals": 9,
+    "year": 2011,
+    "age": 29
+   },
+   {
+    "season": "2012",
+    "club": "Vissel Kobe",
+    "league": "J1 League",
+    "apps": 26,
+    "goals": 4,
+    "year": 2012,
+    "age": 30
+   },
+   {
+    "season": "2013",
+    "club": "Kawasaki Frontale",
+    "league": "J1 League",
+    "apps": 33,
+    "goals": 26,
+    "year": 2013,
+    "age": 31
+   },
+   {
+    "season": "2014",
+    "club": "Kawasaki Frontale",
+    "league": "J1 League",
+    "apps": 32,
+    "goals": 18,
+    "year": 2014,
+    "age": 32
+   },
+   {
+    "season": "2015",
+    "club": "Kawasaki Frontale",
+    "league": "J1 League",
+    "apps": 32,
+    "goals": 23,
+    "year": 2015,
+    "age": 33
+   },
+   {
+    "season": "2016",
+    "club": "Kawasaki Frontale",
+    "league": "J1 League",
+    "apps": 33,
+    "goals": 15,
+    "year": 2016,
+    "age": 34
+   },
+   {
+    "season": "2017",
+    "club": "FC Tokyo",
+    "league": "J1 League",
+    "apps": 28,
+    "goals": 8,
+    "year": 2017,
+    "age": 35
+   },
+   {
+    "season": "2018",
+    "club": "Kawasaki Frontale → Júbilo Iwata",
+    "league": "J1 League",
+    "apps": 29,
+    "goals": 5,
+    "year": 2018,
+    "age": 36
+   },
+   {
+    "season": "2019",
+    "club": "Júbilo Iwata",
+    "league": "J1 League",
+    "apps": 20,
+    "goals": 1,
+    "year": 2019,
+    "age": 37
+   },
+   {
+    "season": "2020",
+    "club": "Tokyo Verdy",
+    "league": "J2 League",
+    "apps": 19,
+    "goals": 0,
+    "year": 2020,
+    "age": 38
+   },
+   {
+    "season": "2021",
+    "club": "Cerezo Osaka",
+    "league": "J1 League",
+    "apps": 29,
+    "goals": 6,
+    "year": 2021,
+    "age": 39
+   }
+  ]
+ },
+ "nakamura": {
+  "birth": "1978-06-24",
+  "seasons": [
+   {
+    "season": "1997",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 27,
+    "goals": 5,
+    "year": 1997,
+    "age": 19
+   },
+   {
+    "season": "1998",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 33,
+    "goals": 9,
+    "year": 1998,
+    "age": 20
+   },
+   {
+    "season": "1999",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 26,
+    "goals": 7,
+    "year": 1999,
+    "age": 21
+   },
+   {
+    "season": "2000",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 30,
+    "goals": 5,
+    "year": 2000,
+    "age": 22
+   },
+   {
+    "season": "2001",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 24,
+    "goals": 3,
+    "year": 2001,
+    "age": 23
+   },
+   {
+    "season": "2002",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 8,
+    "goals": 4,
+    "year": 2002,
+    "age": 24
+   },
+   {
+    "season": "2002-03",
+    "club": "Reggina",
+    "league": "Serie A",
+    "apps": 31,
+    "goals": 7,
+    "year": 2002,
+    "age": 24
+   },
+   {
+    "season": "2003-04",
+    "club": "Reggina",
+    "league": "Serie A",
+    "apps": 16,
+    "goals": 2,
+    "year": 2003,
+    "age": 25
+   },
+   {
+    "season": "2004-05",
+    "club": "Reggina",
+    "league": "Serie A",
+    "apps": 33,
+    "goals": 2,
+    "year": 2004,
+    "age": 26
+   },
+   {
+    "season": "2005-06",
+    "club": "Celtic",
+    "league": "Scottish Premier League",
+    "apps": 33,
+    "goals": 6,
+    "year": 2005,
+    "age": 27
+   },
+   {
+    "season": "2006-07",
+    "club": "Celtic",
+    "league": "Scottish Premier League",
+    "apps": 37,
+    "goals": 9,
+    "year": 2006,
+    "age": 28
+   },
+   {
+    "season": "2007-08",
+    "club": "Celtic",
+    "league": "Scottish Premier League",
+    "apps": 26,
+    "goals": 6,
+    "year": 2007,
+    "age": 29
+   },
+   {
+    "season": "2008-09",
+    "club": "Celtic",
+    "league": "Scottish Premier League",
+    "apps": 32,
+    "goals": 8,
+    "year": 2008,
+    "age": 30
+   },
+   {
+    "season": "2009-10",
+    "club": "Espanyol",
+    "league": "La Liga",
+    "apps": 13,
+    "goals": 0,
+    "year": 2009,
+    "age": 31
+   },
+   {
+    "season": "2010",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 32,
+    "goals": 5,
+    "year": 2010,
+    "age": 32
+   },
+   {
+    "season": "2011",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 24,
+    "goals": 4,
+    "year": 2011,
+    "age": 33
+   },
+   {
+    "season": "2012",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 31,
+    "goals": 6,
+    "year": 2012,
+    "age": 34
+   },
+   {
+    "season": "2013",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 33,
+    "goals": 10,
+    "year": 2013,
+    "age": 35
+   },
+   {
+    "season": "2014",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 32,
+    "goals": 3,
+    "year": 2014,
+    "age": 36
+   },
+   {
+    "season": "2015",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 19,
+    "goals": 3,
+    "year": 2015,
+    "age": 37
+   },
+   {
+    "season": "2016",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 19,
+    "goals": 4,
+    "year": 2016,
+    "age": 38
+   },
+   {
+    "season": "2017",
+    "club": "Júbilo Iwata",
+    "league": "J1 League",
+    "apps": 30,
+    "goals": 5,
+    "year": 2017,
+    "age": 39
+   },
+   {
+    "season": "2018",
+    "club": "Júbilo Iwata",
+    "league": "J1 League",
+    "apps": 16,
+    "goals": 0,
+    "year": 2018,
+    "age": 40
+   },
+   {
+    "season": "2019",
+    "club": "Júbilo Iwata → Yokohama FC",
+    "league": "J1 League → J2 League",
+    "apps": 12,
+    "goals": 1,
+    "year": 2019,
+    "age": 41
+   },
+   {
+    "season": "2020",
+    "club": "Yokohama FC",
+    "league": "J1 League",
+    "apps": 10,
+    "goals": 0,
+    "year": 2020,
+    "age": 42
+   },
+   {
+    "season": "2021",
+    "club": "Yokohama FC",
+    "league": "J1 League",
+    "apps": 12,
+    "goals": 0,
+    "year": 2021,
+    "age": 43
+   },
+   {
+    "season": "2022",
+    "club": "Yokohama FC",
+    "league": "J2 League",
+    "apps": 6,
+    "goals": 0,
+    "year": 2022,
+    "age": 44
+   }
+  ]
+ },
+ "nakata": {
+  "birth": "1977-01-22",
+  "seasons": [
+   {
+    "season": "1995",
+    "club": "Bellmare Hiratsuka",
+    "league": "J1 League",
+    "apps": 26,
+    "goals": 8,
+    "year": 1995,
+    "age": 18
+   },
+   {
+    "season": "1996",
+    "club": "Bellmare Hiratsuka",
+    "league": "J1 League",
+    "apps": 26,
+    "goals": 2,
+    "year": 1996,
+    "age": 19
+   },
+   {
+    "season": "1997",
+    "club": "Bellmare Hiratsuka",
+    "league": "J1 League",
+    "apps": 21,
+    "goals": 3,
+    "year": 1997,
+    "age": 20
+   },
+   {
+    "season": "1998",
+    "club": "Bellmare Hiratsuka",
+    "league": "J1 League",
+    "apps": 12,
+    "goals": 3,
+    "year": 1998,
+    "age": 21
+   },
+   {
+    "season": "1998-99",
+    "club": "Perugia",
+    "league": "Serie A",
+    "apps": 33,
+    "goals": 10,
+    "year": 1998,
+    "age": 21
+   },
+   {
+    "season": "1999-2000",
+    "club": "Perugia → Roma",
+    "league": "Serie A",
+    "apps": 30,
+    "goals": 5,
+    "year": 1999,
+    "age": 22
+   },
+   {
+    "season": "2000-01",
+    "club": "Roma",
+    "league": "Serie A",
+    "apps": 15,
+    "goals": 2,
+    "year": 2000,
+    "age": 23
+   },
+   {
+    "season": "2001-02",
+    "club": "Parma",
+    "league": "Serie A",
+    "apps": 24,
+    "goals": 1,
+    "year": 2001,
+    "age": 24
+   },
+   {
+    "season": "2002-03",
+    "club": "Parma",
+    "league": "Serie A",
+    "apps": 31,
+    "goals": 4,
+    "year": 2002,
+    "age": 25
+   },
+   {
+    "season": "2003-04",
+    "club": "Parma → Bologna (loan)",
+    "league": "Serie A",
+    "apps": 29,
+    "goals": 2,
+    "year": 2003,
+    "age": 26
+   },
+   {
+    "season": "2004-05",
+    "club": "Fiorentina",
+    "league": "Serie A",
+    "apps": 20,
+    "goals": 0,
+    "year": 2004,
+    "age": 27
+   },
+   {
+    "season": "2005-06",
+    "club": "Bolton Wanderers (loan)",
+    "league": "Premier League",
+    "apps": 21,
+    "goals": 1,
+    "year": 2005,
+    "age": 28
+   }
+  ]
+ },
+ "nakazawa": {
+  "birth": "1978-02-25",
+  "seasons": [
+   {
+    "season": "1999",
+    "club": "Tokyo Verdy",
+    "league": "J1 League",
+    "apps": 28,
+    "goals": 1,
+    "year": 1999,
+    "age": 21
+   },
+   {
+    "season": "2000",
+    "club": "Tokyo Verdy",
+    "league": "J1 League",
+    "apps": 29,
+    "goals": 4,
+    "year": 2000,
+    "age": 22
+   },
+   {
+    "season": "2001",
+    "club": "Tokyo Verdy",
+    "league": "J1 League",
+    "apps": 26,
+    "goals": 0,
+    "year": 2001,
+    "age": 23
+   },
+   {
+    "season": "2002",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 27,
+    "goals": 1,
+    "year": 2002,
+    "age": 24
+   },
+   {
+    "season": "2003",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 29,
+    "goals": 4,
+    "year": 2003,
+    "age": 25
+   },
+   {
+    "season": "2004",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 27,
+    "goals": 1,
+    "year": 2004,
+    "age": 26
+   },
+   {
+    "season": "2005",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 27,
+    "goals": 3,
+    "year": 2005,
+    "age": 27
+   },
+   {
+    "season": "2006",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 23,
+    "goals": 1,
+    "year": 2006,
+    "age": 28
+   },
+   {
+    "season": "2007",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 32,
+    "goals": 2,
+    "year": 2007,
+    "age": 29
+   },
+   {
+    "season": "2008",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 33,
+    "goals": 4,
+    "year": 2008,
+    "age": 30
+   },
+   {
+    "season": "2009",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 32,
+    "goals": 3,
+    "year": 2009,
+    "age": 31
+   },
+   {
+    "season": "2010",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 22,
+    "goals": 0,
+    "year": 2010,
+    "age": 32
+   },
+   {
+    "season": "2011",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 33,
+    "goals": 1,
+    "year": 2011,
+    "age": 33
+   },
+   {
+    "season": "2012",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 33,
+    "goals": 3,
+    "year": 2012,
+    "age": 34
+   },
+   {
+    "season": "2013",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 1,
+    "year": 2013,
+    "age": 35
+   },
+   {
+    "season": "2014",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 2,
+    "year": 2014,
+    "age": 36
+   },
+   {
+    "season": "2015",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 0,
+    "year": 2015,
+    "age": 37
+   },
+   {
+    "season": "2016",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 3,
+    "year": 2016,
+    "age": 38
+   },
+   {
+    "season": "2017",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 1,
+    "year": 2017,
+    "age": 39
+   },
+   {
+    "season": "2018",
+    "club": "Yokohama F. Marinos",
+    "league": "J1 League",
+    "apps": 22,
+    "goals": 1,
+    "year": 2018,
+    "age": 40
+   }
+  ]
+ },
+ "endo": {
+  "birth": "1980-01-28",
+  "seasons": [
+   {
+    "season": "1998",
+    "club": "Yokohama Flügels",
+    "league": "J1 League",
+    "apps": 16,
+    "goals": 1,
+    "year": 1998,
+    "age": 18
+   },
+   {
+    "season": "1999",
+    "club": "Kyoto Purple Sanga",
+    "league": "J1 League",
+    "apps": 24,
+    "goals": 4,
+    "year": 1999,
+    "age": 19
+   },
+   {
+    "season": "2000",
+    "club": "Kyoto Purple Sanga",
+    "league": "J1 League",
+    "apps": 29,
+    "goals": 5,
+    "year": 2000,
+    "age": 20
+   },
+   {
+    "season": "2001",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 29,
+    "goals": 4,
+    "year": 2001,
+    "age": 21
+   },
+   {
+    "season": "2002",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 30,
+    "goals": 5,
+    "year": 2002,
+    "age": 22
+   },
+   {
+    "season": "2003",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 30,
+    "goals": 4,
+    "year": 2003,
+    "age": 23
+   },
+   {
+    "season": "2004",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 29,
+    "goals": 9,
+    "year": 2004,
+    "age": 24
+   },
+   {
+    "season": "2005",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 33,
+    "goals": 10,
+    "year": 2005,
+    "age": 25
+   },
+   {
+    "season": "2006",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 25,
+    "goals": 9,
+    "year": 2006,
+    "age": 26
+   },
+   {
+    "season": "2007",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 8,
+    "year": 2007,
+    "age": 27
+   },
+   {
+    "season": "2008",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 27,
+    "goals": 6,
+    "year": 2008,
+    "age": 28
+   },
+   {
+    "season": "2009",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 32,
+    "goals": 10,
+    "year": 2009,
+    "age": 29
+   },
+   {
+    "season": "2010",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 30,
+    "goals": 3,
+    "year": 2010,
+    "age": 30
+   },
+   {
+    "season": "2011",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 33,
+    "goals": 4,
+    "year": 2011,
+    "age": 31
+   },
+   {
+    "season": "2012",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 5,
+    "year": 2012,
+    "age": 32
+   },
+   {
+    "season": "2013",
+    "club": "Gamba Osaka",
+    "league": "J2 League",
+    "apps": 33,
+    "goals": 5,
+    "year": 2013,
+    "age": 33
+   },
+   {
+    "season": "2014",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 6,
+    "year": 2014,
+    "age": 34
+   },
+   {
+    "season": "2015",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 5,
+    "year": 2015,
+    "age": 35
+   },
+   {
+    "season": "2016",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 2,
+    "year": 2016,
+    "age": 36
+   },
+   {
+    "season": "2017",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 31,
+    "goals": 1,
+    "year": 2017,
+    "age": 37
+   },
+   {
+    "season": "2018",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 34,
+    "goals": 1,
+    "year": 2018,
+    "age": 38
+   },
+   {
+    "season": "2019",
+    "club": "Gamba Osaka",
+    "league": "J1 League",
+    "apps": 28,
+    "goals": 1,
+    "year": 2019,
+    "age": 39
+   },
+   {
+    "season": "2020",
+    "club": "Gamba Osaka → Júbilo Iwata (loan)",
+    "league": "J1 League → J2 League",
+    "apps": 26,
+    "goals": 2,
+    "year": 2020,
+    "age": 40
+   },
+   {
+    "season": "2021",
+    "club": "Júbilo Iwata (loan)",
+    "league": "J2 League",
+    "apps": 35,
+    "goals": 3,
+    "year": 2021,
+    "age": 41
+   },
+   {
+    "season": "2022",
+    "club": "Júbilo Iwata",
+    "league": "J1 League",
+    "apps": 31,
+    "goals": 0,
+    "year": 2022,
+    "age": 42
+   },
+   {
+    "season": "2023",
+    "club": "Júbilo Iwata",
+    "league": "J2 League",
+    "apps": 20,
+    "goals": 0,
+    "year": 2023,
+    "age": 43
+   }
+  ]
+ },
+ "ronaldo": {
+  "birth": "1976-09-22",
+  "seasons": [
+   {
+    "season": "1993",
+    "club": "Cruzeiro",
+    "league": "Série A",
+    "apps": 14,
+    "goals": 12,
+    "year": 1993,
+    "age": 16
+   },
+   {
+    "season": "1994-95",
+    "club": "PSV",
+    "league": "Eredivisie",
+    "apps": 33,
+    "goals": 30,
+    "year": 1994,
+    "age": 17
+   },
+   {
+    "season": "1995-96",
+    "club": "PSV",
+    "league": "Eredivisie",
+    "apps": 13,
+    "goals": 12,
+    "year": 1995,
+    "age": 18
+   },
+   {
+    "season": "1996-97",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "apps": 37,
+    "goals": 34,
+    "year": 1996,
+    "age": 19
+   },
+   {
+    "season": "1997-98",
+    "club": "Inter Milan",
+    "league": "Serie A",
+    "apps": 32,
+    "goals": 25,
+    "year": 1997,
+    "age": 20
+   },
+   {
+    "season": "1998-99",
+    "club": "Inter Milan",
+    "league": "Serie A",
+    "apps": 19,
+    "goals": 14,
+    "year": 1998,
+    "age": 21
+   },
+   {
+    "season": "1999-2000",
+    "club": "Inter Milan",
+    "league": "Serie A",
+    "apps": 7,
+    "goals": 3,
+    "year": 1999,
+    "age": 22
+   },
+   {
+    "season": "2000-01",
+    "club": "Inter Milan",
+    "league": "Serie A",
+    "apps": 0,
+    "goals": 0,
+    "year": 2000,
+    "age": 23
+   },
+   {
+    "season": "2001-02",
+    "club": "Inter Milan",
+    "league": "Serie A",
+    "apps": 10,
+    "goals": 7,
+    "year": 2001,
+    "age": 24
+   },
+   {
+    "season": "2002-03",
+    "club": "Real Madrid",
+    "league": "La Liga",
+    "apps": 31,
+    "goals": 23,
+    "year": 2002,
+    "age": 25
+   },
+   {
+    "season": "2003-04",
+    "club": "Real Madrid",
+    "league": "La Liga",
+    "apps": 32,
+    "goals": 24,
+    "year": 2003,
+    "age": 26
+   },
+   {
+    "season": "2004-05",
+    "club": "Real Madrid",
+    "league": "La Liga",
+    "apps": 34,
+    "goals": 21,
+    "year": 2004,
+    "age": 27
+   },
+   {
+    "season": "2005-06",
+    "club": "Real Madrid",
+    "league": "La Liga",
+    "apps": 23,
+    "goals": 14,
+    "year": 2005,
+    "age": 28
+   },
+   {
+    "season": "2006-07",
+    "club": "Real Madrid → AC Milan",
+    "league": "La Liga → Serie A",
+    "apps": 21,
+    "goals": 8,
+    "year": 2006,
+    "age": 29
+   },
+   {
+    "season": "2007-08",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 6,
+    "goals": 2,
+    "year": 2007,
+    "age": 30
+   },
+   {
+    "season": "2009",
+    "club": "Corinthians",
+    "league": "Série A",
+    "apps": 20,
+    "goals": 12,
+    "year": 2009,
+    "age": 32
+   },
+   {
+    "season": "2010",
+    "club": "Corinthians",
+    "league": "Série A",
+    "apps": 11,
+    "goals": 6,
+    "year": 2010,
+    "age": 33
+   }
+  ]
+ },
+ "drogba": {
+  "birth": "1978-03-11",
+  "seasons": [
+   {
+    "season": "1998-99",
+    "club": "Le Mans",
+    "league": "French Division 2",
+    "apps": 2,
+    "goals": 0,
+    "year": 1998,
+    "age": 20
+   },
+   {
+    "season": "1999-2000",
+    "club": "Le Mans",
+    "league": "French Division 2",
+    "apps": 30,
+    "goals": 7,
+    "year": 1999,
+    "age": 21
+   },
+   {
+    "season": "2000-01",
+    "club": "Le Mans",
+    "league": "French Division 2",
+    "apps": 11,
+    "goals": 0,
+    "year": 2000,
+    "age": 22
+   },
+   {
+    "season": "2001-02",
+    "club": "Le Mans → Guingamp",
+    "league": "French Division 2 → French Division 1",
+    "apps": 32,
+    "goals": 8,
+    "year": 2001,
+    "age": 23
+   },
+   {
+    "season": "2002-03",
+    "club": "Guingamp",
+    "league": "Ligue 1",
+    "apps": 34,
+    "goals": 17,
+    "year": 2002,
+    "age": 24
+   },
+   {
+    "season": "2003-04",
+    "club": "Marseille",
+    "league": "Ligue 1",
+    "apps": 35,
+    "goals": 19,
+    "year": 2003,
+    "age": 25
+   },
+   {
+    "season": "2004-05",
+    "club": "Chelsea",
+    "league": "Premier League",
+    "apps": 26,
+    "goals": 10,
+    "year": 2004,
+    "age": 26
+   },
+   {
+    "season": "2005-06",
+    "club": "Chelsea",
+    "league": "Premier League",
+    "apps": 29,
+    "goals": 12,
+    "year": 2005,
+    "age": 27
+   },
+   {
+    "season": "2006-07",
+    "club": "Chelsea",
+    "league": "Premier League",
+    "apps": 36,
+    "goals": 20,
+    "year": 2006,
+    "age": 28
+   },
+   {
+    "season": "2007-08",
+    "club": "Chelsea",
+    "league": "Premier League",
+    "apps": 19,
+    "goals": 8,
+    "year": 2007,
+    "age": 29
+   },
+   {
+    "season": "2008-09",
+    "club": "Chelsea",
+    "league": "Premier League",
+    "apps": 24,
+    "goals": 5,
+    "year": 2008,
+    "age": 30
+   },
+   {
+    "season": "2009-10",
+    "club": "Chelsea",
+    "league": "Premier League",
+    "apps": 32,
+    "goals": 29,
+    "year": 2009,
+    "age": 31
+   },
+   {
+    "season": "2010-11",
+    "club": "Chelsea",
+    "league": "Premier League",
+    "apps": 36,
+    "goals": 11,
+    "year": 2010,
+    "age": 32
+   },
+   {
+    "season": "2011-12",
+    "club": "Chelsea",
+    "league": "Premier League",
+    "apps": 24,
+    "goals": 5,
+    "year": 2011,
+    "age": 33
+   },
+   {
+    "season": "2012",
+    "club": "Shanghai Shenhua",
+    "league": "Chinese Super League",
+    "apps": 11,
+    "goals": 8,
+    "year": 2012,
+    "age": 34
+   },
+   {
+    "season": "2012-13",
+    "club": "Galatasaray",
+    "league": "Süper Lig",
+    "apps": 13,
+    "goals": 5,
+    "year": 2012,
+    "age": 34
+   },
+   {
+    "season": "2013-14",
+    "club": "Galatasaray",
+    "league": "Süper Lig",
+    "apps": 24,
+    "goals": 10,
+    "year": 2013,
+    "age": 35
+   },
+   {
+    "season": "2014-15",
+    "club": "Chelsea",
+    "league": "Premier League",
+    "apps": 28,
+    "goals": 4,
+    "year": 2014,
+    "age": 36
+   },
+   {
+    "season": "2015",
+    "club": "Montreal Impact",
+    "league": "MLS",
+    "apps": 11,
+    "goals": 11,
+    "year": 2015,
+    "age": 37
+   },
+   {
+    "season": "2016",
+    "club": "Montreal Impact",
+    "league": "MLS",
+    "apps": 22,
+    "goals": 10,
+    "year": 2016,
+    "age": 38
+   },
+   {
+    "season": "2017",
+    "club": "Phoenix Rising",
+    "league": "USL",
+    "apps": 13,
+    "goals": 9,
+    "year": 2017,
+    "age": 39
+   },
+   {
+    "season": "2018",
+    "club": "Phoenix Rising",
+    "league": "USL",
+    "apps": 8,
+    "goals": 4,
+    "year": 2018,
+    "age": 40
+   }
+  ]
+ },
+ "ibra": {
+  "birth": "1981-10-03",
+  "seasons": [
+   {
+    "season": "1999",
+    "club": "Malmö FF",
+    "league": "Allsvenskan",
+    "apps": 6,
+    "goals": 1,
+    "year": 1999,
+    "age": 17
+   },
+   {
+    "season": "2000",
+    "club": "Malmö FF",
+    "league": "Superettan",
+    "apps": 26,
+    "goals": 12,
+    "year": 2000,
+    "age": 18
+   },
+   {
+    "season": "2001",
+    "club": "Malmö FF",
+    "league": "Allsvenskan",
+    "apps": 8,
+    "goals": 3,
+    "year": 2001,
+    "age": 19
+   },
+   {
+    "season": "2001-02",
+    "club": "Ajax",
+    "league": "Eredivisie",
+    "apps": 24,
+    "goals": 6,
+    "year": 2001,
+    "age": 19
+   },
+   {
+    "season": "2002-03",
+    "club": "Ajax",
+    "league": "Eredivisie",
+    "apps": 25,
+    "goals": 13,
+    "year": 2002,
+    "age": 20
+   },
+   {
+    "season": "2003-04",
+    "club": "Ajax",
+    "league": "Eredivisie",
+    "apps": 22,
+    "goals": 13,
+    "year": 2003,
+    "age": 21
+   },
+   {
+    "season": "2004-05",
+    "club": "Ajax → Juventus",
+    "league": "Eredivisie → Serie A",
+    "apps": 38,
+    "goals": 19,
+    "year": 2004,
+    "age": 22
+   },
+   {
+    "season": "2005-06",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 35,
+    "goals": 7,
+    "year": 2005,
+    "age": 23
+   },
+   {
+    "season": "2006-07",
+    "club": "Inter Milan",
+    "league": "Serie A",
+    "apps": 27,
+    "goals": 15,
+    "year": 2006,
+    "age": 24
+   },
+   {
+    "season": "2007-08",
+    "club": "Inter Milan",
+    "league": "Serie A",
+    "apps": 26,
+    "goals": 17,
+    "year": 2007,
+    "age": 25
+   },
+   {
+    "season": "2008-09",
+    "club": "Inter Milan",
+    "league": "Serie A",
+    "apps": 35,
+    "goals": 25,
+    "year": 2008,
+    "age": 26
+   },
+   {
+    "season": "2009-10",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "apps": 29,
+    "goals": 16,
+    "year": 2009,
+    "age": 27
+   },
+   {
+    "season": "2010-11",
+    "club": "Barcelona → AC Milan (loan)",
+    "league": "La Liga → Serie A",
+    "apps": 29,
+    "goals": 14,
+    "year": 2010,
+    "age": 28
+   },
+   {
+    "season": "2011-12",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 32,
+    "goals": 28,
+    "year": 2011,
+    "age": 29
+   },
+   {
+    "season": "2012-13",
+    "club": "Paris Saint-Germain",
+    "league": "Ligue 1",
+    "apps": 34,
+    "goals": 30,
+    "year": 2012,
+    "age": 30
+   },
+   {
+    "season": "2013-14",
+    "club": "Paris Saint-Germain",
+    "league": "Ligue 1",
+    "apps": 33,
+    "goals": 26,
+    "year": 2013,
+    "age": 31
+   },
+   {
+    "season": "2014-15",
+    "club": "Paris Saint-Germain",
+    "league": "Ligue 1",
+    "apps": 24,
+    "goals": 19,
+    "year": 2014,
+    "age": 32
+   },
+   {
+    "season": "2015-16",
+    "club": "Paris Saint-Germain",
+    "league": "Ligue 1",
+    "apps": 31,
+    "goals": 38,
+    "year": 2015,
+    "age": 33
+   },
+   {
+    "season": "2016-17",
+    "club": "Manchester United",
+    "league": "Premier League",
+    "apps": 28,
+    "goals": 17,
+    "year": 2016,
+    "age": 34
+   },
+   {
+    "season": "2017-18",
+    "club": "Manchester United",
+    "league": "Premier League",
+    "apps": 5,
+    "goals": 0,
+    "year": 2017,
+    "age": 35
+   },
+   {
+    "season": "2018",
+    "club": "LA Galaxy",
+    "league": "Major League Soccer",
+    "apps": 27,
+    "goals": 22,
+    "year": 2018,
+    "age": 36
+   },
+   {
+    "season": "2019",
+    "club": "LA Galaxy",
+    "league": "Major League Soccer",
+    "apps": 29,
+    "goals": 30,
+    "year": 2019,
+    "age": 37
+   },
+   {
+    "season": "2019-20",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 18,
+    "goals": 10,
+    "year": 2019,
+    "age": 37
+   },
+   {
+    "season": "2020-21",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 19,
+    "goals": 15,
+    "year": 2020,
+    "age": 38
+   },
+   {
+    "season": "2021-22",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 23,
+    "goals": 8,
+    "year": 2021,
+    "age": 39
+   },
+   {
+    "season": "2022-23",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 4,
+    "goals": 1,
+    "year": 2022,
+    "age": 40
+   }
+  ]
+ },
+ "maldini": {
+  "birth": "1968-06-26",
+  "seasons": [
+   {
+    "season": "1984-85",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 1,
+    "goals": 0,
+    "year": 1984,
+    "age": 16
+   },
+   {
+    "season": "1985-86",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 27,
+    "goals": 0,
+    "year": 1985,
+    "age": 17
+   },
+   {
+    "season": "1986-87",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 29,
+    "goals": 1,
+    "year": 1986,
+    "age": 18
+   },
+   {
+    "season": "1987-88",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 26,
+    "goals": 2,
+    "year": 1987,
+    "age": 19
+   },
+   {
+    "season": "1988-89",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 26,
+    "goals": 0,
+    "year": 1988,
+    "age": 20
+   },
+   {
+    "season": "1989-90",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 30,
+    "goals": 1,
+    "year": 1989,
+    "age": 21
+   },
+   {
+    "season": "1990-91",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 26,
+    "goals": 4,
+    "year": 1990,
+    "age": 22
+   },
+   {
+    "season": "1991-92",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 31,
+    "goals": 3,
+    "year": 1991,
+    "age": 23
+   },
+   {
+    "season": "1992-93",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 31,
+    "goals": 2,
+    "year": 1992,
+    "age": 24
+   },
+   {
+    "season": "1993-94",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 30,
+    "goals": 1,
+    "year": 1993,
+    "age": 25
+   },
+   {
+    "season": "1994-95",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 29,
+    "goals": 2,
+    "year": 1994,
+    "age": 26
+   },
+   {
+    "season": "1995-96",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 30,
+    "goals": 3,
+    "year": 1995,
+    "age": 27
+   },
+   {
+    "season": "1996-97",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 26,
+    "goals": 1,
+    "year": 1996,
+    "age": 28
+   },
+   {
+    "season": "1997-98",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 30,
+    "goals": 0,
+    "year": 1997,
+    "age": 29
+   },
+   {
+    "season": "1998-99",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 31,
+    "goals": 1,
+    "year": 1998,
+    "age": 30
+   },
+   {
+    "season": "1999-2000",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 27,
+    "goals": 1,
+    "year": 1999,
+    "age": 31
+   },
+   {
+    "season": "2000-01",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 31,
+    "goals": 1,
+    "year": 2000,
+    "age": 32
+   },
+   {
+    "season": "2001-02",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 15,
+    "goals": 0,
+    "year": 2001,
+    "age": 33
+   },
+   {
+    "season": "2002-03",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 29,
+    "goals": 2,
+    "year": 2002,
+    "age": 34
+   },
+   {
+    "season": "2003-04",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 30,
+    "goals": 0,
+    "year": 2003,
+    "age": 35
+   },
+   {
+    "season": "2004-05",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 33,
+    "goals": 0,
+    "year": 2004,
+    "age": 36
+   },
+   {
+    "season": "2005-06",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 14,
+    "goals": 2,
+    "year": 2005,
+    "age": 37
+   },
+   {
+    "season": "2006-07",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 18,
+    "goals": 1,
+    "year": 2006,
+    "age": 38
+   },
+   {
+    "season": "2007-08",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 17,
+    "goals": 1,
+    "year": 2007,
+    "age": 39
+   },
+   {
+    "season": "2008-09",
+    "club": "AC Milan",
+    "league": "Serie A",
+    "apps": 30,
+    "goals": 0,
+    "year": 2008,
+    "age": 40
+   }
+  ]
+ },
+ "buffon": {
+  "birth": "1978-01-28",
+  "seasons": [
+   {
+    "season": "1995-96",
+    "club": "Parma",
+    "league": "Serie A",
+    "apps": 9,
+    "goals": 0,
+    "year": 1995,
+    "age": 17
+   },
+   {
+    "season": "1996-97",
+    "club": "Parma",
+    "league": "Serie A",
+    "apps": 27,
+    "goals": 0,
+    "year": 1996,
+    "age": 18
+   },
+   {
+    "season": "1997-98",
+    "club": "Parma",
+    "league": "Serie A",
+    "apps": 32,
+    "goals": 0,
+    "year": 1997,
+    "age": 19
+   },
+   {
+    "season": "1998-99",
+    "club": "Parma",
+    "league": "Serie A",
+    "apps": 34,
+    "goals": 0,
+    "year": 1998,
+    "age": 20
+   },
+   {
+    "season": "1999-2000",
+    "club": "Parma",
+    "league": "Serie A",
+    "apps": 32,
+    "goals": 0,
+    "year": 1999,
+    "age": 21
+   },
+   {
+    "season": "2000-01",
+    "club": "Parma",
+    "league": "Serie A",
+    "apps": 34,
+    "goals": 0,
+    "year": 2000,
+    "age": 22
+   },
+   {
+    "season": "2001-02",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 34,
+    "goals": 0,
+    "year": 2001,
+    "age": 23
+   },
+   {
+    "season": "2002-03",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 32,
+    "goals": 0,
+    "year": 2002,
+    "age": 24
+   },
+   {
+    "season": "2003-04",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 32,
+    "goals": 0,
+    "year": 2003,
+    "age": 25
+   },
+   {
+    "season": "2004-05",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 37,
+    "goals": 0,
+    "year": 2004,
+    "age": 26
+   },
+   {
+    "season": "2005-06",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 18,
+    "goals": 0,
+    "year": 2005,
+    "age": 27
+   },
+   {
+    "season": "2006-07",
+    "club": "Juventus",
+    "league": "Serie B",
+    "apps": 37,
+    "goals": 0,
+    "year": 2006,
+    "age": 28
+   },
+   {
+    "season": "2007-08",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 34,
+    "goals": 0,
+    "year": 2007,
+    "age": 29
+   },
+   {
+    "season": "2008-09",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 23,
+    "goals": 0,
+    "year": 2008,
+    "age": 30
+   },
+   {
+    "season": "2009-10",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 27,
+    "goals": 0,
+    "year": 2009,
+    "age": 31
+   },
+   {
+    "season": "2010-11",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 16,
+    "goals": 0,
+    "year": 2010,
+    "age": 32
+   },
+   {
+    "season": "2011-12",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 35,
+    "goals": 0,
+    "year": 2011,
+    "age": 33
+   },
+   {
+    "season": "2012-13",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 32,
+    "goals": 0,
+    "year": 2012,
+    "age": 34
+   },
+   {
+    "season": "2013-14",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 33,
+    "goals": 0,
+    "year": 2013,
+    "age": 35
+   },
+   {
+    "season": "2014-15",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 33,
+    "goals": 0,
+    "year": 2014,
+    "age": 36
+   },
+   {
+    "season": "2015-16",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 35,
+    "goals": 0,
+    "year": 2015,
+    "age": 37
+   },
+   {
+    "season": "2016-17",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 30,
+    "goals": 0,
+    "year": 2016,
+    "age": 38
+   },
+   {
+    "season": "2017-18",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 21,
+    "goals": 0,
+    "year": 2017,
+    "age": 39
+   },
+   {
+    "season": "2018-19",
+    "club": "Paris Saint-Germain",
+    "league": "Ligue 1",
+    "apps": 17,
+    "goals": 0,
+    "year": 2018,
+    "age": 40
+   },
+   {
+    "season": "2019-20",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 9,
+    "goals": 0,
+    "year": 2019,
+    "age": 41
+   },
+   {
+    "season": "2020-21",
+    "club": "Juventus",
+    "league": "Serie A",
+    "apps": 8,
+    "goals": 0,
+    "year": 2020,
+    "age": 42
+   },
+   {
+    "season": "2021-22",
+    "club": "Parma",
+    "league": "Serie B",
+    "apps": 26,
+    "goals": 0,
+    "year": 2021,
+    "age": 43
+   },
+   {
+    "season": "2022-23",
+    "club": "Parma",
+    "league": "Serie B",
+    "apps": 17,
+    "goals": 0,
+    "year": 2022,
+    "age": 44
+   }
+  ]
+ }
+}
