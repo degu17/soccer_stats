@@ -1,0 +1,35 @@
+{
+  "id": "./",
+  "name": "この数字、だれ？ — スタッツ探偵",
+  "short_name": "スタッツ探偵",
+  "description": "サッカー選手の数字を手がかりに、6人の容疑者から1人を絞る推理パズル。",
+  "lang": "ja",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#efe8da",
+  "theme_color": "#efe8da",
+  "categories": ["games", "education"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

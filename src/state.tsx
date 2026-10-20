@@ -1,51 +1,75 @@
 import { createContext, type ComponentChildren } from 'preact';
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'preact/hooks';
-import { load, persist, type CaseScores, type Save } from './lib/store';
-import { rankOf } from './lib/score';
+import { CASES } from './data/cases';
+import {
+  loadSave,
+  persistSave,
+  resetStoredSave,
+  withCaseResult,
+  type CaseProgress,
+  type CaseResultInput,
+  type SaveDataV2,
+  type Settings,
+} from './lib/save';
 import { setSoundEnabled } from './lib/sound';
 
 export type Route =
   | { name: 'title' }
-  | { name: 'howto'; then: Route }
+  | { name: 'howto' }
   | { name: 'board' }
   | { name: 'case'; id: string }
   | { name: 'glossary' }
-  | { name: 'complete' }
   | { name: 'credits' };
 
 interface Ctx {
-  save: Save;
+  save: SaveDataV2;
   route: Route;
   go: (r: Route) => void;
   toast: (msg: string) => void;
   toggleSound: () => void;
+  setSetting: <K extends keyof Settings>(key: K, value: Settings[K]) => void;
   unlockTerms: (ids: readonly string[]) => void;
-  recordCase: (id: string, scores: CaseScores) => { total: number; isBest: boolean; firstClear: boolean };
   markTutorialSeen: () => void;
+  saveProgress: (progress: CaseProgress) => void;
+  clearProgress: (caseId: string) => void;
+  recordResult: (input: Omit<CaseResultInput, 'totalCases'>) => {
+    isBest: boolean;
+    firstClear: boolean;
+    best: number;
+  };
+  resetGameData: () => void;
+  dismissMigrationNotice: () => void;
 }
 
 const AppCtx = createContext<Ctx>(null as unknown as Ctx);
 export const useApp = () => useContext(AppCtx);
 
 export function AppProvider({ children }: { children: (ctx: Ctx, toastMsg: string | null) => ComponentChildren }) {
-  const [save, setSave] = useState<Save>(load);
+  const [save, setSave] = useState<SaveDataV2>(loadSave);
   const [route, setRoute] = useState<Route>({ name: 'title' });
   const [toastMsg, setToastMsg] = useState<string | null>(null);
-  const toastTimer = useRef<number>();
-  // Read through a ref so callbacks can see the latest save synchronously.
+  const toastTimer = useRef<number | undefined>(undefined);
   const saveRef = useRef(save);
   saveRef.current = save;
 
-  useEffect(() => persist(save), [save]);
-  useEffect(() => setSoundEnabled(save.sound), [save.sound]);
+  useEffect(() => persistSave(save), [save]);
+  useEffect(() => setSoundEnabled(save.settings.sound), [save.settings.sound]);
 
   const go = useCallback((r: Route) => setRoute(r), []);
   const toast = useCallback((msg: string) => {
     setToastMsg(msg);
     window.clearTimeout(toastTimer.current);
-    toastTimer.current = window.setTimeout(() => setToastMsg(null), 1800);
+    toastTimer.current = window.setTimeout(() => setToastMsg(null), 1900);
   }, []);
-  const toggleSound = useCallback(() => setSave((s) => ({ ...s, sound: !s.sound })), []);
+
+  const toggleSound = useCallback(() => {
+    setSave((s) => ({ ...s, settings: { ...s.settings, sound: !s.settings.sound } }));
+  }, []);
+
+  const setSetting = useCallback(<K extends keyof Settings>(key: K, value: Settings[K]) => {
+    setSave((s) => ({ ...s, settings: { ...s.settings, [key]: value } }));
+  }, []);
+
   const unlockTerms = useCallback(
     (ids: readonly string[]) => {
       const add = ids.filter((id) => !saveRef.current.terms.includes(id));
@@ -55,28 +79,81 @@ export function AppProvider({ children }: { children: (ctx: Ctx, toastMsg: strin
     },
     [toast],
   );
-  const markTutorialSeen = useCallback(() => setSave((s) => (s.tutorialSeen ? s : { ...s, tutorialSeen: true })), []);
 
-  const recordCase = useCallback((id: string, scores: CaseScores) => {
-    const total = scores.estimate + scores.profile + scores.draw + scores.bonus;
-    const prev = saveRef.current.results[id];
-    const isBest = !prev || total > prev.best;
-    const best = Math.max(total, prev?.best ?? 0);
+  const markTutorialSeen = useCallback(() => {
+    setSave((s) => (s.tutorialSeen ? s : { ...s, tutorialSeen: true }));
+  }, []);
+
+  const saveProgress = useCallback((progress: CaseProgress) => {
+    const stamped = { ...progress, updatedAt: new Date().toISOString() };
     const next = {
       ...saveRef.current,
-      results: {
-        ...saveRef.current.results,
-        [id]: { best, bestRank: rankOf(best), last: scores, plays: (prev?.plays ?? 0) + 1 },
-      },
+      progress: { ...saveRef.current.progress, [stamped.caseId]: stamped },
     };
     saveRef.current = next;
     setSave(next);
-    return { total, isBest, firstClear: !prev };
+  }, []);
+
+  const clearProgress = useCallback((caseId: string) => {
+    const { [caseId]: _removed, ...rest } = saveRef.current.progress;
+    const next = { ...saveRef.current, progress: rest };
+    saveRef.current = next;
+    setSave(next);
+  }, []);
+
+  const recordResult = useCallback((input: Omit<CaseResultInput, 'totalCases'>) => {
+    const outcome = withCaseResult(saveRef.current, {
+      ...input,
+      totalCases: CASES.length,
+    });
+    saveRef.current = outcome.save;
+    setSave(outcome.save);
+    return { isBest: outcome.isBest, firstClear: outcome.firstClear, best: outcome.best };
+  }, []);
+
+  const resetGameData = useCallback(() => {
+    const next = resetStoredSave();
+    saveRef.current = next;
+    setSave(next);
+    setRoute({ name: 'title' });
+    toast('事件データをリセットしました');
+  }, [toast]);
+
+  const dismissMigrationNotice = useCallback(() => {
+    setSave((s) => ({ ...s, migrationNotice: false }));
   }, []);
 
   const ctx = useMemo(
-    () => ({ save, route, go, toast, toggleSound, unlockTerms, recordCase, markTutorialSeen }),
-    [save, route, go, toast, toggleSound, unlockTerms, recordCase, markTutorialSeen],
+    () => ({
+      save,
+      route,
+      go,
+      toast,
+      toggleSound,
+      setSetting,
+      unlockTerms,
+      markTutorialSeen,
+      saveProgress,
+      clearProgress,
+      recordResult,
+      resetGameData,
+      dismissMigrationNotice,
+    }),
+    [
+      save,
+      route,
+      go,
+      toast,
+      toggleSound,
+      setSetting,
+      unlockTerms,
+      markTutorialSeen,
+      saveProgress,
+      clearProgress,
+      recordResult,
+      resetGameData,
+      dismissMigrationNotice,
+    ],
   );
 
   return <AppCtx.Provider value={ctx}>{children(ctx, toastMsg)}</AppCtx.Provider>;

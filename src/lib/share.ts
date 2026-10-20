@@ -1,28 +1,3 @@
-import type { Rank } from './score';
-import { MAX_TOTAL, RANK_TITLE } from './score';
-import type { CaseScores } from './store';
-
-const bar = (v: number, max: number) => {
-  const n = Math.round((v / max) * 5);
-  return '■'.repeat(n) + '□'.repeat(5 - n);
-};
-
-/** Spoiler-free result text: no player name, so friends can play the same file. */
-export function shareText(file: number, s: CaseScores, total: number, rank: Rank) {
-  return [
-    `🔎 この数字、だれ？ FILE ${String(file).padStart(2, '0')}`,
-    `目利き ${bar(s.estimate, 100)} ${s.estimate}`,
-    `見抜き ${bar(s.profile, 100)} ${s.profile}`,
-    `描く　 ${bar(s.draw, 100)} ${s.draw}`,
-    `合計 ${total}/${MAX_TOTAL}（${rank}・${RANK_TITLE[rank]}）`,
-    '#スタッツ探偵',
-  ].join('\n');
-}
-
-export function shareAllText(total: number, max: number, rank: Rank) {
-  return [`🔎 この数字、だれ？ 全10事件 解決！`, `総合 ${total}/${max}（${rank}・${RANK_TITLE[rank]}）`, '#スタッツ探偵'].join('\n');
-}
-
 /** execCommand fallback for frames that refuse the async clipboard API. */
 function legacyCopy(text: string) {
   const ta = document.createElement('textarea');

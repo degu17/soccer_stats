@@ -1,6 +1,6 @@
 import type { ComponentChildren } from 'preact';
 import { useEffect, useLayoutEffect, useRef, useState } from 'preact/hooks';
-import type { Rank } from '../lib/score';
+import type { Rank } from '../data/caseTypes';
 import { sfx } from '../lib/sound';
 import { IconBack } from './icons';
 

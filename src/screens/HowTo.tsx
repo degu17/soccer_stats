@@ -1,83 +1,141 @@
+import { CASES } from '../data/cases';
+import { useApp } from '../state';
 import { sfx } from '../lib/sound';
-import { useApp, type Route } from '../state';
 import { TopBar } from '../components/ui';
 import { IconArrow } from '../components/icons';
 
 const STEPS = [
-  { n: '1', title: '数字の目利き', body: '「何点取った？」を物差しで予想。近いほど高得点。', art: 'ruler' },
-  { n: '2', title: 'プロファイリング', body: 'スカウティング・レポートの数字から、FW・MF・DF・GKを見抜く。', art: 'report' },
-  { n: '3', title: 'キャリア・ドロー', body: '移籍やケガを手がかりに、毎年の成績を鉛筆で描く。本物と重ねて答え合わせ。', art: 'draw' },
+  {
+    n: '01',
+    title: '事件カードを読む',
+    body: '名前を伏せた「謎の選手X」と、無料の手がかりが1つ。まずは容疑者カードの数字を並べて見る。',
+    art: 'file',
+  },
+  {
+    n: '02',
+    title: '手がかりを買って、消す',
+    body: '6ptの予算で手がかりを買う。条件に合わない容疑者は×。残った候補と予算を見ながら、次の1枚を選ぶ。',
+    art: 'cross',
+  },
+  {
+    n: '03',
+    title: '2枚の証拠で告発する',
+    body: '最後に1人を選び、購入済みの手がかりから2枚を証拠に。2枚を重ねて1人だけ残れば、推理の完成。',
+    art: 'chain',
+  },
 ] as const;
 
-export function HowTo({ then }: { then: Route }) {
+export function HowTo() {
   const app = useApp();
+  const tutorial = CASES.find((c) => c.tutorial);
+  const go = () => {
+    sfx.tap();
+    if (!app.save.tutorialSeen && tutorial) {
+      app.go({ name: 'case', id: tutorial.id });
+    } else {
+      app.go({ name: 'board' });
+    }
+  };
+
   return (
-    <div class="screen">
-      <TopBar onBack={() => app.go(then.name === 'board' ? { name: 'title' } : then)} kicker="BRIEFING" title="捜査の手順" />
-      <div class="grow col howto">
-        <p class="howto-lead">
-          謎の選手の<b>スタッツ</b>（成績の数字）から、3つの手がかりで正体に迫る。
-        </p>
-        <ol class="howto-list">
-          {STEPS.map((s, i) => (
-            <li key={s.n} class="rise" style={{ animationDelay: `${i * 90}ms` }}>
-              <span class="howto-n num">{s.n}</span>
-              <div>
-                <b>{s.title}</b>
-                <span>{s.body}</span>
+    <div class="screen dx-screen dx-howto">
+      <TopBar onBack={() => app.go({ name: 'title' })} kicker="BRIEFING" title="あそびかた" />
+      <div class="grow dx-scroll dx-howto-scroll">
+        <header class="dx-howto-head">
+          <span class="kicker">HOW TO INVESTIGATE</span>
+          <h1 class="display">
+            数字を読む。<br />
+            容疑者を消す。
+          </h1>
+          <p>
+            サッカーの知識は要らない。容疑者カードに書かれた数字と、買った手がかりを照合するだけ。
+          </p>
+        </header>
+
+        <ol class="dx-howto-list">
+          {STEPS.map((step) => (
+            <li key={step.n}>
+              <span class="dx-howto-no mono">{step.n}</span>
+              <div class="dx-howto-copy">
+                <h2 class="display">{step.title}</h2>
+                <p>{step.body}</p>
               </div>
-              <HowArt kind={s.art} />
+              <HowArt kind={step.art} />
             </li>
           ))}
         </ol>
-        <p class="howto-foot">
-          最後に正体と、数字に隠れた物語が明かされる。
-          <br />
-          名前を知らなくても大丈夫。<span class="marker">推理で勝負だ。</span>
+
+        <section class="dx-howto-rules sheet">
+          <span class="kicker">THE RULES</span>
+          <dl>
+            <div>
+              <dt>予算</dt>
+              <dd>1事件6pt。手がかりは1〜3pt。使わずに残すほど効率点が高い。</dd>
+            </div>
+            <div>
+              <dt>証拠</dt>
+              <dd>購入済みの手がかりから2枚。両方に当てはまる人物が1人だけなら成立。</dd>
+            </div>
+            <div>
+              <dt>得点</dt>
+              <dd>正解50 + 証拠30/20/10 + 効率20 − 誤告発10。90点以上でS。</dd>
+            </div>
+            <div>
+              <dt>失敗</dt>
+              <dd>誤告発しても事件は終わらない。その人物が×になり、−10点。</dd>
+            </div>
+          </dl>
+        </section>
+
+        <p class="dx-howto-foot">
+          迷ったら、安い手がかりから。<span class="marker">1枚で消える人数より、2枚の交点を見る。</span>
         </p>
       </div>
-      <div class="actions">
-        <button
-          class="btn btn-primary"
-          onClick={() => {
-            sfx.tap();
-            app.go(then);
-          }}
-        >
-          了解 <IconArrow />
+      <div class="actions dx-actions">
+        <button class="btn btn-primary" onClick={go}>
+          {!app.save.tutorialSeen && tutorial ? 'チュートリアルを始める' : '事件ファイルへ'}
+          <IconArrow />
         </button>
       </div>
     </div>
   );
 }
 
-function HowArt({ kind }: { kind: 'ruler' | 'report' | 'draw' }) {
+function HowArt({ kind }: { kind: 'file' | 'cross' | 'chain' }) {
   return (
-    <svg viewBox="0 0 64 48" class="how-art" aria-hidden="true">
-      {kind === 'ruler' && (
+    <svg viewBox="0 0 78 64" class="dx-how-art" aria-hidden="true">
+      {kind === 'file' && (
         <>
-          <rect x="3" y="18" width="58" height="16" fill="#f7f2e7" stroke="#1b1815" stroke-width="1.2" />
-          {Array.from({ length: 12 }, (_, i) => (
-            <line key={i} x1={7 + i * 4.6} x2={7 + i * 4.6} y1="18" y2={i % 5 === 0 ? 27 : 23} stroke="#1b1815" stroke-width="1" />
-          ))}
-          <path d="M38 6 L38 34" stroke="#d33a1d" stroke-width="1.6" />
-          <path d="M34 4 L42 4 L38 10 Z" fill="#d33a1d" />
+          <rect x="7" y="4" width="64" height="56" rx="2" fill="#f7f2e7" stroke="#1b1815" stroke-width="1.4" />
+          <rect x="14" y="11" width="50" height="9" fill="#1b1815" opacity="0.08" />
+          <text x="39" y="40" text-anchor="middle" font-family="'Dela Gothic One',sans-serif" font-size="26" fill="#d33a1d">
+            ?
+          </text>
+          <line x1="15" y1="49" x2="63" y2="49" stroke="#1b1815" stroke-width="1" stroke-dasharray="2 2" />
         </>
       )}
-      {kind === 'report' && (
+      {kind === 'cross' && (
         <>
-          <rect x="10" y="4" width="44" height="40" fill="#f7f2e7" stroke="#1b1815" stroke-width="1.2" />
-          {[13, 20, 27, 34].map((y) => (
-            <line key={y} x1="15" x2="49" y1={y} y2={y} stroke="#958c7e" stroke-dasharray="1.5 2" />
-          ))}
-          <ellipse cx="40" cy="27" rx="11" ry="6" fill="none" stroke="#2152a6" stroke-width="1.8" />
+          <rect x="5" y="6" width="68" height="12" fill="#f7f2e7" stroke="#1b1815" stroke-width="1" />
+          <rect x="5" y="24" width="68" height="12" fill="#f7f2e7" stroke="#1b1815" stroke-width="1" />
+          <rect x="5" y="42" width="68" height="12" fill="#f7f2e7" stroke="#1b1815" stroke-width="1" />
+          <circle cx="14" cy="12" r="3.5" fill="none" stroke="#2152a6" stroke-width="1.5" />
+          <circle cx="14" cy="30" r="3.5" fill="none" stroke="#2152a6" stroke-width="1.5" />
+          <path d="M58 8l8 8M66 8l-8 8" stroke="#d33a1d" stroke-width="2" />
+          <path d="M58 26l8 8M66 26l-8 8" stroke="#d33a1d" stroke-width="2" />
+          <line x1="25" y1="12" x2="48" y2="12" stroke="#958c7e" stroke-width="1.4" />
+          <line x1="25" y1="30" x2="45" y2="30" stroke="#958c7e" stroke-width="1.4" />
+          <line x1="25" y1="48" x2="52" y2="48" stroke="#958c7e" stroke-width="1.4" />
         </>
       )}
-      {kind === 'draw' && (
+      {kind === 'chain' && (
         <>
-          <path d="M4 40 H60 M4 40 V4" stroke="#1b1815" stroke-width="1.2" fill="none" />
-          <path d="M8 34 L18 22 L28 28 L40 10 L54 24" fill="none" stroke="#d33a1d" stroke-width="2" />
-          <path d="M8 30 L18 28 L28 22 L40 18 L54 28" fill="none" stroke="#2152a6" stroke-width="2" stroke-dasharray="3 2.5" />
+          <rect x="7" y="9" width="41" height="30" rx="1" transform="rotate(-7 27 24)" fill="#f7f2e7" stroke="#1b1815" stroke-width="1.2" />
+          <rect x="30" y="25" width="41" height="30" rx="1" transform="rotate(6 50 40)" fill="#f7f2e7" stroke="#1b1815" stroke-width="1.2" />
+          <circle cx="49" cy="38" r="10" fill="none" stroke="#d33a1d" stroke-width="1.6" />
+          <path d="M44 38l3.5 3.5L55 33" fill="none" stroke="#d33a1d" stroke-width="1.8" />
+          <line x1="14" y1="19" x2="38" y2="19" stroke="#958c7e" stroke-width="1.2" />
+          <line x1="36" y1="46" x2="61" y2="46" stroke="#958c7e" stroke-width="1.2" />
         </>
       )}
     </svg>

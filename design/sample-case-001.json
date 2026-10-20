@@ -1,0 +1,465 @@
+{
+  "caseFile": {
+    "id": "case-001",
+    "volumeId": "vol-01",
+    "number": 1,
+    "title": "途切れない線",
+    "subtitle": "26シーズン、一度も途切れなかった",
+    "difficulty": "normal",
+    "estimatedMinutes": 6,
+    "answerId": "endo",
+    "suspectIds": ["endo", "nakamura", "nakata", "ono", "inamoto", "kengo"],
+    "freeClues": [
+      {
+        "id": "free-2010s",
+        "text": "2010年代も現役",
+        "effect": { "kind": "careerSpanIncludes", "from": 2010, "to": 2019 }
+      }
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "title": "海外キャリア",
+        "question": "海外のクラブでプレーしたことは？",
+        "answerText": "ない",
+        "cost": 1,
+        "effect": { "kind": "noOverseas" },
+        "lessonId": "overseas",
+        "tags": ["profile", "career", "bargain"]
+      },
+      {
+        "id": "c2",
+        "title": "所属クラブ数",
+        "question": "プロ生活で所属したクラブはいくつ？",
+        "answerText": "4つ以下",
+        "cost": 1,
+        "effect": { "kind": "maxClubs", "value": 4 },
+        "lessonId": "club-count",
+        "tags": ["career", "bargain"]
+      },
+      {
+        "id": "c3",
+        "title": "リーグ通算得点",
+        "question": "リーグ戦の通算得点は？",
+        "answerText": "100点以上",
+        "cost": 2,
+        "effect": { "kind": "minCareerGoals", "value": 100 },
+        "lessonId": "total-goals",
+        "tags": ["stats", "goals"]
+      },
+      {
+        "id": "c4",
+        "title": "日本代表",
+        "question": "日本代表の出場試合数は？",
+        "answerText": "100試合以上",
+        "cost": 3,
+        "effect": { "kind": "minCaps", "value": 100 },
+        "lessonId": "caps",
+        "tags": ["stats", "national-team", "decisive"]
+      },
+      {
+        "id": "c5",
+        "title": "J1優勝",
+        "question": "J1リーグの優勝回数は？",
+        "answerText": "2回以上",
+        "cost": 2,
+        "effect": { "kind": "minJ1Titles", "value": 2 },
+        "lessonId": "titles",
+        "tags": ["honors", "j1"]
+      },
+      {
+        "id": "c6",
+        "title": "30代のMVP",
+        "question": "30歳以降にJ1 MVPを獲ったことは？",
+        "answerText": "ある",
+        "cost": 2,
+        "effect": { "kind": "mvpAtAge", "min": 30 },
+        "lessonId": "mvp",
+        "tags": ["honors", "weak"]
+      },
+      {
+        "id": "c7",
+        "title": "最終シーズン",
+        "question": "最後のシーズン、所属したリーグは？",
+        "answerText": "2部",
+        "cost": 1,
+        "effect": { "kind": "lastTier", "value": 2 },
+        "lessonId": "league-tier",
+        "tags": ["career", "ending", "bargain"]
+      },
+      {
+        "id": "c8",
+        "title": "身長",
+        "question": "身長は？",
+        "answerText": "178cm",
+        "cost": 1,
+        "effect": { "kind": "height", "value": 178 },
+        "lessonId": "height",
+        "tags": ["profile", "body", "bargain"]
+      }
+    ],
+    "hook": "長く現役を続けた、静かな記録破り。その線は、一度も途切れなかった。",
+    "reveal": {
+      "catchcopy": "18歳でデビュー、43歳で引退。線は、静かに長く続いた。",
+      "story": [
+        {
+          "order": 1,
+          "season": "1998",
+          "title": "18歳でプロへ",
+          "text": "横浜フリューゲルスでデビュー。翌年は京都パープルサンガへ。2001年、ガンバ大阪に移る。ここから20年、ガンバの中心になる。"
+        },
+        {
+          "order": 2,
+          "season": "2013",
+          "title": "J2でも33試合",
+          "text": "ガンバがJ2に降格。33歳の遠藤は残留し、33試合に出場。翌2014年、J1に戻ったチームを優勝に導き、J1 MVPに。年齢は34歳だった。"
+        },
+        {
+          "order": 3,
+          "season": "2023",
+          "title": "43歳で引退",
+          "text": "40歳を過ぎてもジュビロ磐田で35試合に出場。日本代表152試合は歴代最多。43歳でスパイクを脱いだ。"
+        }
+      ],
+      "lesson": {
+        "id": "lesson-total",
+        "title": "通算記録は「長く続けた人」の記録",
+        "body": "775試合は、26シーズンで割ると約29.8試合/年。ほぼ毎年、リーグ戦の大半に出ていたということ。113得点はMFとしては多いが、1試合あたり0.15点。点取り屋ではなく、試合を組み立てる選手だった。152キャップは、20年間、代表に選ばれ続けた記録。通算は「すごいプレーを1回した」ではなく、「同じレベルを長く続けた」証明。でも、1試合あたりに直すと役割が見える。",
+        "termIds": ["total", "pergame", "caps", "league-tier"]
+      },
+      "sources": [
+        {
+          "label": "Wikipedia: Yasuhito Endo",
+          "url": "https://en.wikipedia.org/wiki/Yasuhito_Endo",
+          "retrievedAt": "2026-10-20",
+          "license": "CC BY-SA"
+        },
+        {
+          "label": "J.League Data Site: 遠藤保仁",
+          "url": "https://data.j-league.or.jp/",
+          "retrievedAt": "2026-10-20"
+        }
+      ]
+    },
+    "scoring": {
+      "tokens": 6,
+      "evidenceCount": 2,
+      "correct": 50,
+      "tightEvidence": 30,
+      "validEvidence": 20,
+      "weakEvidence": 10,
+      "efficiency": 20,
+      "wrongAccusationPenalty": 10,
+      "hintPenalty": 0
+    },
+    "validation": {
+      "optimalTokens": 2,
+      "optimalExample": ["c1", "c7"],
+      "exampleTightPairs": [
+        ["c1", "c3"],
+        ["c1", "c7"],
+        ["c1", "c8"],
+        ["c2", "c3"],
+        ["c2", "c7"],
+        ["c2", "c8"],
+        ["c3", "c5"],
+        ["c5", "c7"],
+        ["c5", "c8"]
+      ],
+      "learningGoal": "2つの手がかりを重ねると1人に絞れる。通算記録は長く続けた証明。"
+    },
+    "tutorial": false,
+    "volumeTitle": "Vol.1 日本代表の系譜"
+  },
+  "suspects": [
+    {
+      "id": "endo",
+      "nameJa": "遠藤 保仁",
+      "nameEn": "Yasuhito Endo",
+      "photo": "players/endo.jpg",
+      "photoStatus": "ready",
+      "position": "MF",
+      "nation": "日本",
+      "birthYear": 1980,
+      "height": 178,
+      "foot": "右",
+      "careerSpan": { "from": 1998, "to": 2023 },
+      "clubCount": 4,
+      "clubs": [
+        { "name": "Yokohama Flügels", "nameJa": "横浜フリューゲルス", "country": "日本", "from": 1998, "to": 1998 },
+        { "name": "Kyoto Purple Sanga", "nameJa": "京都パープルサンガ", "country": "日本", "from": 1999, "to": 2000 },
+        { "name": "Gamba Osaka", "nameJa": "ガンバ大阪", "country": "日本", "from": 2001, "to": 2020 },
+        { "name": "Júbilo Iwata", "nameJa": "ジュビロ磐田", "country": "日本", "from": 2020, "to": 2023 }
+      ],
+      "overseas": false,
+      "careerApps": 775,
+      "careerGoals": 113,
+      "caps": 152,
+      "j1Titles": 2,
+      "mvpCount": 1,
+      "mvpAges": [34],
+      "lastTier": 2,
+      "honors": [
+        "J1リーグ優勝 2回（2005, 2014）",
+        "J1 MVP 2014",
+        "アジア年間最優秀選手 2009",
+        "日本代表152試合（歴代最多）"
+      ],
+      "tags": ["海外未経験", "長期キャリア", "J2経験", "代表記録"],
+      "sparkline": [16, 29, 33, 34, 31, 20],
+      "sources": [
+        {
+          "label": "Wikipedia: Yasuhito Endo",
+          "url": "https://en.wikipedia.org/wiki/Yasuhito_Endo",
+          "retrievedAt": "2026-10-20",
+          "license": "CC BY-SA"
+        },
+        {
+          "label": "src/data/seasons.json",
+          "url": "local:src/data/seasons.json",
+          "retrievedAt": "2026-10-20"
+        }
+      ]
+    },
+    {
+      "id": "nakamura",
+      "nameJa": "中村 俊輔",
+      "nameEn": "Shunsuke Nakamura",
+      "photo": "players/nakamura.jpg",
+      "photoStatus": "ready",
+      "position": "MF",
+      "nation": "日本",
+      "birthYear": 1978,
+      "height": 178,
+      "foot": "左",
+      "careerSpan": { "from": 1997, "to": 2022 },
+      "clubCount": 6,
+      "clubs": [
+        { "name": "Yokohama F. Marinos", "nameJa": "横浜F・マリノス", "country": "日本", "from": 1997, "to": 2002 },
+        { "name": "Reggina", "nameJa": "レッジーナ", "country": "イタリア", "from": 2002, "to": 2005 },
+        { "name": "Celtic", "nameJa": "セルティック", "country": "スコットランド", "from": 2005, "to": 2009 },
+        { "name": "Espanyol", "nameJa": "エスパニョール", "country": "スペイン", "from": 2009, "to": 2010 },
+        { "name": "Yokohama F. Marinos", "nameJa": "横浜F・マリノス", "country": "日本", "from": 2010, "to": 2016 },
+        { "name": "Júbilo Iwata", "nameJa": "ジュビロ磐田", "country": "日本", "from": 2017, "to": 2019 },
+        { "name": "Yokohama FC", "nameJa": "横浜FC", "country": "日本", "from": 2019, "to": 2022 }
+      ],
+      "overseas": true,
+      "careerApps": 645,
+      "careerGoals": 114,
+      "caps": 98,
+      "j1Titles": 0,
+      "mvpCount": 2,
+      "mvpAges": [22, 35],
+      "lastTier": 2,
+      "honors": [
+        "J1 MVP 2000, 2013",
+        "スコットランド・プレミアリーグ優勝 3回",
+        "スコットランド年間MVP 2007"
+      ],
+      "tags": ["左足", "海外経験", "J1 MVP 2回", "J2経験"],
+      "sparkline": [27, 30, 37, 33, 30, 16],
+      "sources": [
+        {
+          "label": "Wikipedia: Shunsuke Nakamura",
+          "url": "https://en.wikipedia.org/wiki/Shunsuke_Nakamura",
+          "retrievedAt": "2026-10-20",
+          "license": "CC BY-SA"
+        },
+        {
+          "label": "src/data/seasons.json",
+          "url": "local:src/data/seasons.json",
+          "retrievedAt": "2026-10-20"
+        }
+      ]
+    },
+    {
+      "id": "nakata",
+      "nameJa": "中田 英寿",
+      "nameEn": "Hidetoshi Nakata",
+      "photo": "players/nakata.jpg",
+      "photoStatus": "ready",
+      "position": "MF",
+      "nation": "日本",
+      "birthYear": 1977,
+      "height": 175,
+      "foot": "右",
+      "careerSpan": { "from": 1995, "to": 2006 },
+      "clubCount": 7,
+      "clubs": [
+        { "name": "Bellmare Hiratsuka", "nameJa": "ベルマーレ平塚", "country": "日本", "from": 1995, "to": 1998 },
+        { "name": "Perugia", "nameJa": "ペルージャ", "country": "イタリア", "from": 1998, "to": 2000 },
+        { "name": "Roma", "nameJa": "ローマ", "country": "イタリア", "from": 2000, "to": 2001 },
+        { "name": "Parma", "nameJa": "パルマ", "country": "イタリア", "from": 2001, "to": 2004 },
+        { "name": "Bologna", "nameJa": "ボローニャ", "country": "イタリア", "from": 2004, "to": 2004, "loan": true },
+        { "name": "Fiorentina", "nameJa": "フィオレンティーナ", "country": "イタリア", "from": 2004, "to": 2006 },
+        { "name": "Bolton Wanderers", "nameJa": "ボルトン", "country": "イングランド", "from": 2005, "to": 2006, "loan": true }
+      ],
+      "overseas": true,
+      "careerApps": 288,
+      "careerGoals": 41,
+      "caps": 77,
+      "j1Titles": 0,
+      "mvpCount": 0,
+      "mvpAges": [],
+      "lastTier": 1,
+      "honors": [
+        "セリエA優勝 2000-01（ローマ）",
+        "日本代表77試合"
+      ],
+      "tags": ["海外経験", "29歳で引退", "セリエA優勝"],
+      "sparkline": [26, 33, 30, 15, 31, 20],
+      "sources": [
+        {
+          "label": "Wikipedia: Hidetoshi Nakata",
+          "url": "https://en.wikipedia.org/wiki/Hidetoshi_Nakata",
+          "retrievedAt": "2026-10-20",
+          "license": "CC BY-SA"
+        },
+        {
+          "label": "src/data/seasons.json",
+          "url": "local:src/data/seasons.json",
+          "retrievedAt": "2026-10-20"
+        }
+      ]
+    },
+    {
+      "id": "ono",
+      "nameJa": "小野 伸二",
+      "nameEn": "Shinji Ono",
+      "photo": null,
+      "photoStatus": "pending",
+      "position": "MF",
+      "nation": "日本",
+      "birthYear": 1979,
+      "height": 175,
+      "foot": "右",
+      "careerSpan": { "from": 1998, "to": 2023 },
+      "clubCount": 7,
+      "clubs": [
+        { "name": "Urawa Reds", "nameJa": "浦和レッズ", "country": "日本", "from": 1998, "to": 2001 },
+        { "name": "Feyenoord", "nameJa": "フェイエノールト", "country": "オランダ", "from": 2001, "to": 2005 },
+        { "name": "Urawa Reds", "nameJa": "浦和レッズ", "country": "日本", "from": 2006, "to": 2007 },
+        { "name": "VfL Bochum", "nameJa": "ボーフム", "country": "ドイツ", "from": 2008, "to": 2009 },
+        { "name": "Shimizu S-Pulse", "nameJa": "清水エスパルス", "country": "日本", "from": 2010, "to": 2012 },
+        { "name": "Western Sydney Wanderers", "nameJa": "ウェスタン・シドニー", "country": "オーストラリア", "from": 2012, "to": 2014 },
+        { "name": "Hokkaido Consadole Sapporo", "nameJa": "コンサドーレ札幌", "country": "日本", "from": 2014, "to": 2019 },
+        { "name": "FC Ryukyu", "nameJa": "FC琉球", "country": "日本", "from": 2019, "to": 2020 },
+        { "name": "Hokkaido Consadole Sapporo", "nameJa": "コンサドーレ札幌", "country": "日本", "from": 2021, "to": 2023 }
+      ],
+      "overseas": true,
+      "careerApps": 481,
+      "careerGoals": 66,
+      "caps": 56,
+      "j1Titles": 1,
+      "mvpCount": 0,
+      "mvpAges": [],
+      "lastTier": 1,
+      "honors": [
+        "UEFAカップ優勝 2001-02",
+        "J1優勝 2006",
+        "AFCチャンピオンズリーグ優勝 2007"
+      ],
+      "tags": ["海外経験", "天才", "J1優勝", "ケガ"],
+      "sparkline": [27, 30, 29, 24, 17, 1],
+      "sources": [
+        {
+          "label": "Wikipedia: Shinji Ono",
+          "url": "https://en.wikipedia.org/wiki/Shinji_Ono",
+          "retrievedAt": "2026-10-20",
+          "license": "CC BY-SA"
+        }
+      ]
+    },
+    {
+      "id": "inamoto",
+      "nameJa": "稲本 潤一",
+      "nameEn": "Junichi Inamoto",
+      "photo": null,
+      "photoStatus": "pending",
+      "position": "MF",
+      "nation": "日本",
+      "birthYear": 1979,
+      "height": 181,
+      "foot": "右",
+      "careerSpan": { "from": 1997, "to": 2024 },
+      "clubCount": 12,
+      "clubs": [
+        { "name": "Gamba Osaka", "nameJa": "ガンバ大阪", "country": "日本", "from": 1997, "to": 2004 },
+        { "name": "Arsenal", "nameJa": "アーセナル", "country": "イングランド", "from": 2001, "to": 2002, "loan": true },
+        { "name": "Fulham", "nameJa": "フラム", "country": "イングランド", "from": 2002, "to": 2004, "loan": true },
+        { "name": "West Bromwich Albion", "nameJa": "WBA", "country": "イングランド", "from": 2004, "to": 2006 },
+        { "name": "Cardiff City", "nameJa": "カーディフ", "country": "ウェールズ", "from": 2004, "to": 2005, "loan": true },
+        { "name": "Galatasaray", "nameJa": "ガラタサライ", "country": "トルコ", "from": 2006, "to": 2007 },
+        { "name": "Eintracht Frankfurt", "nameJa": "フランクフルト", "country": "ドイツ", "from": 2007, "to": 2009 },
+        { "name": "Rennes", "nameJa": "レンヌ", "country": "フランス", "from": 2009, "to": 2010 },
+        { "name": "Kawasaki Frontale", "nameJa": "川崎フロンターレ", "country": "日本", "from": 2010, "to": 2014 },
+        { "name": "Hokkaido Consadole Sapporo", "nameJa": "コンサドーレ札幌", "country": "日本", "from": 2015, "to": 2018 },
+        { "name": "SC Sagamihara", "nameJa": "SC相模原", "country": "日本", "from": 2019, "to": 2021 },
+        { "name": "Nankatsu SC", "nameJa": "南葛SC", "country": "日本", "from": 2022, "to": 2024 }
+      ],
+      "overseas": true,
+      "careerApps": 441,
+      "careerGoals": 25,
+      "caps": 82,
+      "j1Titles": 0,
+      "mvpCount": 0,
+      "mvpAges": [],
+      "lastTier": 5,
+      "honors": [
+        "UEFAインタートトゥカップ優勝 2002",
+        "J2優勝 2016",
+        "日本代表82試合"
+      ],
+      "tags": ["海外経験", "プレミアリーグ", "多数クラブ", "下部リーグ"],
+      "sparkline": [27, 28, 25, 31, 9, 2],
+      "sources": [
+        {
+          "label": "Wikipedia: Junichi Inamoto",
+          "url": "https://en.wikipedia.org/wiki/Junichi_Inamoto",
+          "retrievedAt": "2026-10-20",
+          "license": "CC BY-SA"
+        }
+      ]
+    },
+    {
+      "id": "kengo",
+      "nameJa": "中村 憲剛",
+      "nameEn": "Kengo Nakamura",
+      "photo": null,
+      "photoStatus": "pending",
+      "position": "MF",
+      "nation": "日本",
+      "birthYear": 1980,
+      "height": 175,
+      "foot": "右",
+      "careerSpan": { "from": 2003, "to": 2020 },
+      "clubCount": 1,
+      "clubs": [
+        { "name": "Kawasaki Frontale", "nameJa": "川崎フロンターレ", "country": "日本", "from": 2003, "to": 2020 }
+      ],
+      "overseas": false,
+      "careerApps": 546,
+      "careerGoals": 83,
+      "caps": 68,
+      "j1Titles": 3,
+      "mvpCount": 1,
+      "mvpAges": [36],
+      "lastTier": 1,
+      "honors": [
+        "J1リーグ優勝 3回（2017, 2018, 2020）",
+        "J1 MVP 2016",
+        "Jリーグカップ優勝 2019"
+      ],
+      "tags": ["ワンクラブ", "海外未経験", "J1優勝3回", "30代MVP"],
+      "sparkline": [34, 41, 34, 33, 20, 13],
+      "sources": [
+        {
+          "label": "Wikipedia: Kengo Nakamura",
+          "url": "https://en.wikipedia.org/wiki/Kengo_Nakamura",
+          "retrievedAt": "2026-10-20",
+          "license": "CC BY-SA"
+        }
+      ]
+    }
+  ]
+}
