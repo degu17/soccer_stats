@@ -1,105 +1,418 @@
-import { useRef, useState } from 'preact/hooks';
-import { PLAYERS, playerById } from '../data/players';
-import { UNLOCKS } from '../lib/glossary';
-import { rankOf } from '../lib/score';
-import type { CaseScores } from '../lib/store';
+import { useMemo, useRef, useState } from 'preact/hooks';
+import type { CaseBundle, Clue } from '../data/caseTypes';
+import { getCaseBundle, nextCaseAfter, suspectById } from '../data/cases';
+import {
+  contradictionFor,
+  evaluateEvidence,
+  matchesEffect,
+  scoreCase,
+  tokensUsed,
+} from '../lib/caseEngine';
+import {
+  marksAfterPurchase,
+  newCaseProgress,
+  type CaseProgress,
+  type SuspectMark,
+} from '../lib/save';
 import { useApp } from '../state';
-import { shareOrCopy, shareText } from '../lib/share';
-import { ScorePill, Steps, TopBar } from '../components/ui';
-import { Intro } from './case/Intro';
-import { Estimate } from './case/Estimate';
-import { Profile } from './case/Profile';
-import { Draw } from './case/Draw';
-import { Bonus } from './case/Bonus';
-import { Reveal } from './case/Reveal';
-import { Story } from './case/Story';
+import { sfx } from '../lib/sound';
+import { TopBar } from '../components/ui';
+import { CaseIntro } from './detective/CaseIntro';
+import { Investigate } from './detective/Investigate';
+import { ClueDeck } from './detective/ClueDeck';
+import { Evidence } from './detective/Evidence';
+import { CaseReveal } from './detective/Reveal';
+import { CaseResult } from './detective/Result';
+import { Modal } from './detective/CaseBits';
 
-type Phase = 'intro' | 'estimate' | 'profile' | 'draw' | 'bonus' | 'reveal' | 'story';
-
-const STEP_INDEX: Partial<Record<Phase, number>> = { estimate: 0, profile: 1, draw: 2, bonus: 3 };
+type View = 'intro' | 'investigate' | 'deck' | 'evidence' | 'reveal' | 'result';
 
 export function Case({ id }: { id: string }) {
+  const bundle = getCaseBundle(id);
+  if (!bundle) {
+    return (
+      <div class="screen">
+        <TopBar kicker="CASE FILE" title="事件が見つかりません" />
+        <p class="note">事件ファイルが読み込めませんでした。</p>
+      </div>
+    );
+  }
+  return <CaseGame key={bundle.caseFile.id} bundle={bundle} />;
+}
+
+function CaseGame({ bundle }: { bundle: CaseBundle }) {
   const app = useApp();
-  const player = playerById(id);
-  const [phase, setPhase] = useState<Phase>('intro');
-  const [scores, setScores] = useState<CaseScores>({ estimate: 0, profile: 0, draw: 0, bonus: 0 });
-  const [isBest, setIsBest] = useState(false);
-  const [completedNow, setCompletedNow] = useState(false);
-  const backArmed = useRef(0);
-  const [gain, setGain] = useState(0);
-  const coach = !app.save.tutorialSeen;
-  const running = scores.estimate + scores.profile + scores.draw + scores.bonus;
+  const { caseFile } = bundle;
+  const saved = app.save.progress[caseFile.id];
+  const [progress, setProgress] = useState<CaseProgress>(() => saved ?? newCaseProgress(bundle));
+  const [view, setView] = useState<View>(() => {
+    if (!saved) return 'intro';
+    if (saved.phase === 'evidence') return 'evidence';
+    if (saved.phase === 'reveal') return 'reveal';
+    if (saved.phase === 'result') return 'result';
+    if (saved.phase === 'investigating') return 'investigate';
+    return 'intro';
+  });
+  const [paused, setPaused] = useState(false);
+  const [wrong, setWrong] = useState<{ suspectId: string; clue: Clue | null } | null>(null);
+  const [outcome, setOutcome] = useState<{ isBest: boolean; firstClear: boolean } | null>(null);
+  const recordedRef = useRef(Boolean(saved?.resultRecorded));
 
-  const next = (key: keyof CaseScores, value: number, to: Phase) => {
-    const s = { ...scores, [key]: value };
-    setScores(s);
-    setGain(value);
-    if (key !== 'bonus') app.unlockTerms(UNLOCKS[key]);
-    if (to === 'reveal') {
-      const r = app.recordCase(player.id, s);
-      setIsBest(r.isBest && !r.firstClear);
-      // The clear that finishes the last unsolved file leads to the final results screen.
-      setCompletedNow(r.firstClear && PLAYERS.every((p) => p.id === player.id || app.save.results[p.id]));
-      app.markTutorialSeen();
+  const purchased = useMemo(
+    () => caseFile.clues.filter((clue) => progress.purchasedClueIds.includes(clue.id)),
+    [caseFile.clues, progress.purchasedClueIds],
+  );
+  const used = tokensUsed(bundle, progress.purchasedClueIds);
+  const evaluation = useMemo(
+    () => evaluateEvidence(bundle, progress.purchasedClueIds, progress.selectedEvidenceIds),
+    [bundle, progress.purchasedClueIds, progress.selectedEvidenceIds],
+  );
+  const score = useMemo(
+    () =>
+      scoreCase({
+        correct: true,
+        evidenceScore: evaluation.evidenceScore,
+        tokensTotal: caseFile.scoring.tokens,
+        tokensUsed: used,
+        wrongAccusations: progress.wrongAccusations,
+        scoring: caseFile.scoring,
+      }),
+    [caseFile.scoring, evaluation.evidenceScore, progress.wrongAccusations, used],
+  );
+  const savedResult = app.save.results[caseFile.id];
+  const best = savedResult?.bestScore ?? score.total;
+  const next = nextCaseAfter(caseFile.id);
+
+  const commit = (nextProgress: CaseProgress) => {
+    const stamped = { ...nextProgress, updatedAt: new Date().toISOString() };
+    setProgress(stamped);
+    app.saveProgress(stamped);
+  };
+
+  const start = () => {
+    sfx.stamp();
+    commit({ ...progress, phase: 'investigating' });
+    setView('investigate');
+  };
+
+  const toggleMark = (id: string) => {
+    const suspect = caseFile.suspectIds.includes(id)
+      ? bundle.suspects.find((s) => s.id === id)
+      : undefined;
+    if (!suspect) return;
+    const current = progress.marks[id] ?? 'unknown';
+    const lockedByFree = caseFile.freeClues.some((f) => !matchesEffect(f.effect, suspect));
+    const lockedByClue = purchased.some((clue) => !matchesEffect(clue.effect, suspect));
+    if (current === 'eliminated' && (lockedByFree || lockedByClue)) {
+      app.toast('この容疑者は手がかりと矛盾しています');
+      return;
     }
-    setPhase(to);
+    sfx.tap();
+    const marks: Record<string, SuspectMark> = {
+      ...progress.marks,
+      [id]: current === 'eliminated' ? 'possible' : 'eliminated',
+    };
+    commit({ ...progress, marks });
   };
 
-  const unsolved = PLAYERS.filter((p) => p.id !== player.id && !app.save.results[p.id]);
-
-  const share = () => {
-    const text = shareText(player.file, scores, running, rankOf(running));
-    void shareOrCopy(text, app.toast);
+  const buyClue = (clueId: string): boolean => {
+    const clue = caseFile.clues.find((c) => c.id === clueId);
+    if (!clue) return false;
+    if (progress.purchasedClueIds.includes(clueId)) return false;
+    if (used + clue.cost > caseFile.scoring.tokens) return false;
+    const marks = app.save.settings.assist
+      ? marksAfterPurchase(progress, caseFile, bundle, clueId)
+      : progress.marks;
+    commit({
+      ...progress,
+      purchasedClueIds: [...progress.purchasedClueIds, clueId],
+      marks,
+      phase: 'investigating',
+    });
+    return true;
   };
 
+  const updateSelection = (suspectId: string | null, evidenceIds: string[]) => {
+    commit({
+      ...progress,
+      phase: 'evidence',
+      selectedSuspectId: suspectId,
+      selectedEvidenceIds: evidenceIds.slice(0, caseFile.scoring.evidenceCount),
+    });
+  };
 
-  const step = STEP_INDEX[phase];
-  const inSteps = step !== undefined && step < 3;
+  const accuse = (suspectId: string, evidenceIds: string[]) => {
+    if (recordedRef.current) return;
+    if (suspectId !== caseFile.answerId) {
+      const clue = contradictionFor(bundle, suspectId, progress.purchasedClueIds);
+      const marks: Record<string, SuspectMark> = {
+        ...progress.marks,
+        [suspectId]: 'eliminated',
+      };
+      commit({
+        ...progress,
+        phase: 'investigating',
+        marks,
+        accusedIds: [...progress.accusedIds, suspectId],
+        wrongAccusations: progress.wrongAccusations + 1,
+        selectedEvidenceIds: [],
+        selectedSuspectId: null,
+      });
+      setView('investigate');
+      setWrong({ suspectId, clue });
+      sfx.bad();
+      return;
+    }
+
+    recordedRef.current = true;
+    const finalEvaluation = evaluateEvidence(bundle, progress.purchasedClueIds, evidenceIds);
+    const finalScore = scoreCase({
+      correct: true,
+      evidenceScore: finalEvaluation.evidenceScore,
+      tokensTotal: caseFile.scoring.tokens,
+      tokensUsed: used,
+      wrongAccusations: progress.wrongAccusations,
+      scoring: caseFile.scoring,
+    });
+    const finalProgress: CaseProgress = {
+      ...progress,
+      phase: 'reveal',
+      selectedEvidenceIds: evidenceIds,
+      selectedSuspectId: suspectId,
+      resultRecorded: true,
+    };
+    commit(finalProgress);
+    const result = app.recordResult({
+      caseId: caseFile.id,
+      answerId: caseFile.answerId,
+      score: finalScore,
+      tokensUsed: used,
+      wrongAccusations: progress.wrongAccusations,
+    });
+    setOutcome({ isBest: result.isBest, firstClear: result.firstClear });
+    app.unlockTerms(caseFile.reveal.lesson.termIds);
+    if (caseFile.tutorial) app.markTutorialSeen();
+    sfx.reveal();
+    setView('reveal');
+  };
+
+  const goResult = () => {
+    sfx.tap();
+    commit({ ...progress, phase: 'result' });
+    setView('result');
+  };
+
+  const retry = () => {
+    sfx.whoosh();
+    const fresh = newCaseProgress(bundle);
+    fresh.phase = 'investigating';
+    recordedRef.current = false;
+    setOutcome(null);
+    setWrong(null);
+    setPaused(false);
+    commit(fresh);
+    setView('investigate');
+  };
+
+  const exitToBoard = () => {
+    setPaused(false);
+    app.go({ name: 'board' });
+  };
+
+  const coach = tutorialCoach(bundle, progress, view);
+  const guideClueId = tutorialGuideClue(bundle, progress);
+
+  if (view === 'intro') {
+    return (
+      <CaseIntro
+        bundle={bundle}
+        progress={progress}
+        onBack={() => app.go({ name: 'board' })}
+        onStart={start}
+      />
+    );
+  }
+
+  if (view === 'investigate') {
+    return (
+      <>
+        <Investigate
+          bundle={bundle}
+          progress={progress}
+          assist={app.save.settings.assist}
+          onPause={() => setPaused(true)}
+          onDeck={() => {
+            sfx.tap();
+            setView('deck');
+          }}
+          onEvidence={() => {
+            sfx.tap();
+            commit({ ...progress, phase: 'evidence' });
+            setView('evidence');
+          }}
+          onToggleMark={toggleMark}
+          coach={coach}
+          coachStep={coach ? '01' : undefined}
+        />
+        {paused && (
+          <Modal
+            kicker="PAUSE"
+            title="一時停止"
+            onClose={() => setPaused(false)}
+            footer={
+              <button class="btn btn-primary" onClick={() => setPaused(false)}>
+                捜査に戻る
+              </button>
+            }
+          >
+            <p class="dx-note">ここまでの捜査は自動保存されています。閉じても続きから再開できます。</p>
+            <div class="dx-pause-menu">
+              <button
+                class="btn btn-ghost"
+                onClick={() => app.go({ name: 'glossary' })}
+              >
+                用語ノート
+              </button>
+              <button class="btn btn-ghost" onClick={exitToBoard}>
+                事件ファイルへ
+              </button>
+            </div>
+          </Modal>
+        )}
+        {wrong && (
+          <WrongAccusation
+            bundle={bundle}
+            suspectId={wrong.suspectId}
+            clue={wrong.clue}
+            onClose={() => setWrong(null)}
+          />
+        )}
+      </>
+    );
+  }
+
+  if (view === 'deck') {
+    return (
+      <ClueDeck
+        bundle={bundle}
+        progress={progress}
+        assist={app.save.settings.assist}
+        onBack={() => setView('investigate')}
+        onBuy={buyClue}
+        coach={coach}
+        coachStep={coach ? '02' : undefined}
+        guideClueId={guideClueId}
+      />
+    );
+  }
+
+  if (view === 'evidence') {
+    return (
+      <Evidence
+        bundle={bundle}
+        progress={progress}
+        assist={app.save.settings.assist}
+        onBack={() => {
+          sfx.tap();
+          commit({ ...progress, phase: 'investigating' });
+          setView('investigate');
+        }}
+        onSelection={updateSelection}
+        onAccuse={accuse}
+        coach={coach}
+        coachStep={coach ? '03' : undefined}
+      />
+    );
+  }
+
+  if (view === 'reveal') {
+    return (
+      <CaseReveal
+        bundle={bundle}
+        isBest={Boolean(outcome?.isBest)}
+        onResult={goResult}
+        onExit={exitToBoard}
+      />
+    );
+  }
 
   return (
-    <div class="screen" key={phase}>
-      <TopBar
-        onBack={() => {
-          // Mid-investigation, require a second tap so a stray touch doesn't throw the case away.
-          const midCase = phase !== 'intro' && phase !== 'reveal' && phase !== 'story';
-          if (midCase && Date.now() - backArmed.current > 2500) {
-            backArmed.current = Date.now();
-            app.toast('もう一度押すと、ファイル一覧に戻ります');
-            return;
-          }
-          app.go({ name: 'board' });
-        }}
-        kicker={`FILE ${String(player.file).padStart(2, '0')}`}
-        title={phase === 'reveal' || phase === 'story' ? player.nameJa : '謎の選手 X'}
-        right={
-          inSteps ? (
-            <>
-              <Steps now={step!} />
-              <ScorePill value={running} gain={gain} />
-            </>
-          ) : phase === 'bonus' ? (
-            <ScorePill value={running} gain={gain} />
-          ) : null
-        }
-      />
-      {phase === 'intro' && <Intro player={player} onStart={() => setPhase('estimate')} />}
-      {phase === 'estimate' && <Estimate player={player} coach={coach} onDone={(v) => next('estimate', v, 'profile')} />}
-      {phase === 'profile' && <Profile player={player} coach={coach} onDone={(v) => next('profile', v, 'draw')} />}
-      {phase === 'draw' && <Draw player={player} coach={coach} onDone={(v) => next('draw', v, 'bonus')} />}
-      {phase === 'bonus' && <Bonus player={player} onDone={(v) => next('bonus', v, 'reveal')} />}
-      {phase === 'reveal' && <Reveal player={player} scores={scores} isBest={isBest} onNext={() => setPhase('story')} />}
-      {phase === 'story' && (
-        <Story
-          player={player}
-          onShare={share}
-          nextLabel={completedNow ? '捜査結果へ' : unsolved.length ? '次の事件へ' : 'ファイル一覧へ'}
-          onNext={() => {
-            if (completedNow) app.go({ name: 'complete' });
-            else if (unsolved.length) app.go({ name: 'case', id: unsolved[0].id });
-            else app.go({ name: 'board' });
-          }}
-        />
-      )}
-    </div>
+    <CaseResult
+      bundle={bundle}
+      nextCase={next}
+      progress={progress}
+      score={score}
+      best={best}
+      isBest={Boolean(outcome?.isBest)}
+      firstClear={Boolean(outcome?.firstClear ?? savedResult?.plays === 1)}
+      onRetry={retry}
+      onNext={() => (next ? app.go({ name: 'case', id: next.id }) : app.go({ name: 'board' }))}
+      onBoard={exitToBoard}
+      toast={app.toast}
+    />
   );
+}
+
+function WrongAccusation({
+  bundle,
+  suspectId,
+  clue,
+  onClose,
+}: {
+  bundle: CaseBundle;
+  suspectId: string;
+  clue: Clue | null;
+  onClose: () => void;
+}) {
+  const suspect = suspectById(suspectId);
+  return (
+    <Modal
+      kicker="WRONG"
+      title="違います。"
+      onClose={onClose}
+      footer={
+        <button class="btn btn-primary" onClick={onClose}>
+          捜査に戻る
+        </button>
+      }
+    >
+      <p class="dx-wrong-name">{suspect?.nameJa} は、この事件の犯人ではない。</p>
+      {clue ? (
+        <p class="dx-wrong-reason">
+          <b>「{clue.title}」の答えは「{clue.answerText}」。</b>
+          <br />
+          {suspect?.nameJa}はこの条件と矛盾する。
+        </p>
+      ) : (
+        <p class="dx-wrong-reason">証拠が足りない。もう少し候補を絞ってから告発しよう。</p>
+      )}
+      <p class="dx-wrong-penalty mono">誤告発 −10点</p>
+      <p class="dx-note">告発した人物は×になり、捜査を続けられる。Sは遠のくが、事件は終わらない。</p>
+    </Modal>
+  );
+}
+
+function tutorialCoach(bundle: CaseBundle, progress: CaseProgress, view: View): string | null {
+  if (!bundle.caseFile.tutorial) return null;
+  const has1 = progress.purchasedClueIds.includes('c1');
+  const hasB = progress.purchasedClueIds.includes('c3') || progress.purchasedClueIds.includes('c8');
+  if (view === 'evidence') {
+    return '容疑者を1人選び、証拠を2枚。海外キャリアと、通算得点（または身長）を選ぶと1人に絞れる。';
+  }
+  if (!has1) {
+    return 'まずは『海外キャリア』を買ってみよう。1ptで、海外経験の有無がわかる。';
+  }
+  if (!hasB) {
+    return '次は『リーグ通算得点』。100点以上で、また別の2人に絞れる。2つの交点を見よう。';
+  }
+  return '2つの手がかりの交点は1人だけ。容疑者を確認して、『告発する』へ進もう。';
+}
+
+function tutorialGuideClue(bundle: CaseBundle, progress: CaseProgress): string | undefined {
+  if (!bundle.caseFile.tutorial) return undefined;
+  if (!progress.purchasedClueIds.includes('c1')) return 'c1';
+  if (!progress.purchasedClueIds.includes('c3') && !progress.purchasedClueIds.includes('c8')) {
+    return 'c3';
+  }
+  return undefined;
 }

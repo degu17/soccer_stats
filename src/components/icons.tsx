@@ -73,3 +73,23 @@ export const IconPlus = () => (
     <path d="M6 12h12M12 6v12" />
   </svg>
 );
+export const IconPause = () => (
+  <svg viewBox="0 0 24 24" {...base}>
+    <path d="M9 6v12M15 6v12" />
+  </svg>
+);
+export const IconClose = () => (
+  <svg viewBox="0 0 24 24" {...base}>
+    <path d="M6 6l12 12M18 6L6 18" />
+  </svg>
+);
+export const IconCheck = () => (
+  <svg viewBox="0 0 24 24" {...base}>
+    <path d="M4.5 12.5l5 5L20 6.5" />
+  </svg>
+);
+export const IconChevron = () => (
+  <svg viewBox="0 0 24 24" {...base}>
+    <path d="M9 5l7 7-7 7" />
+  </svg>
+);

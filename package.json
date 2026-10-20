@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "node tests/playtest.mjs",
+    "test": "npm run build && node tests/vertical-slice.mjs && node tests/wrong-accusation.mjs && node tests/save-resume.mjs && node tests/pwa.mjs",
+    "test:cases": "esbuild scripts/validate-cases.ts --bundle --platform=node --format=esm --outfile=tests/.tmp-validate.mjs --define:import.meta.env.DEV=false && node tests/.tmp-validate.mjs",
+    "test:all": "npm run test:cases && npm test",
+    "icons": "node scripts/make-icons.mjs",
     "artifact": "npm run build && node scripts/artifact.mjs"
   },
   "dependencies": {
@@ -15,6 +18,7 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.6",
+    "esbuild": "^0.25.12",
     "playwright-core": "^1.64.0",
     "typescript": "^5.9.3",
     "vite": "^6.4.4",

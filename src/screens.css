@@ -14,7 +14,7 @@
   padding: 2px 0 6px;
   border-bottom: 3px double var(--ink);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
 }

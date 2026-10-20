@@ -5,7 +5,6 @@ import { HowTo } from './screens/HowTo';
 import { Board } from './screens/Board';
 import { Case } from './screens/Case';
 import { Glossary } from './screens/Glossary';
-import { Complete } from './screens/Complete';
 import { Credits } from './screens/Credits';
 
 export function App() {
@@ -17,11 +16,10 @@ export function App() {
           <div class="stage">
             <InkDefs />
             {route.name === 'title' && <Title />}
-            {route.name === 'howto' && <HowTo then={route.then} />}
+            {route.name === 'howto' && <HowTo />}
             {route.name === 'board' && <Board />}
             {route.name === 'case' && <Case key={route.id} id={route.id} />}
             {route.name === 'glossary' && <Glossary />}
-            {route.name === 'complete' && <Complete />}
             {route.name === 'credits' && <Credits />}
             {toast && <div class="toast">{toast}</div>}
           </div>

@@ -1,115 +1,299 @@
-import { PLAYERS } from '../data/players';
-import { TERMS } from '../lib/glossary';
-import { sfx } from '../lib/sound';
+import { useEffect, useState } from 'preact/hooks';
+import { CASES, PLAYABLE_CASES, caseById, firstUnsolvedCase } from '../data/cases';
 import { useApp } from '../state';
-import { IconSoundOff, IconSoundOn } from '../components/icons';
+import { sfx } from '../lib/sound';
+import { IconArrow, IconSoundOff, IconSoundOn } from '../components/icons';
+import { Modal } from './detective/CaseBits';
+
+interface InstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+}
 
 export function Title() {
   const app = useApp();
-  const solved = PLAYERS.filter((p) => app.save.results[p.id]).length;
-  const start = () => {
+  const { save } = app;
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [installPrompt, setInstallPrompt] = useState<InstallPromptEvent | null>(null);
+  const [installed, setInstalled] = useState(() => {
+    const standalone = window.matchMedia('(display-mode: standalone)').matches;
+    const iosStandalone = Boolean((navigator as Navigator & { standalone?: boolean }).standalone);
+    return standalone || iosStandalone;
+  });
+
+  useEffect(() => {
+    const onPrompt = (event: Event) => {
+      event.preventDefault();
+      setInstallPrompt(event as InstallPromptEvent);
+    };
+    const onInstalled = () => {
+      setInstalled(true);
+      setInstallPrompt(null);
+    };
+    window.addEventListener('beforeinstallprompt', onPrompt);
+    window.addEventListener('appinstalled', onInstalled);
+    return () => {
+      window.removeEventListener('beforeinstallprompt', onPrompt);
+      window.removeEventListener('appinstalled', onInstalled);
+    };
+  }, []);
+
+  const install = async () => {
+    if (!installPrompt) return;
     sfx.tap();
-    app.go(app.save.tutorialSeen || solved ? { name: 'board' } : { name: 'howto', then: { name: 'board' } });
+    try {
+      await installPrompt.prompt();
+      await installPrompt.userChoice;
+    } catch {
+      // The browser can expire an install prompt; hiding it is the safe fallback.
+    } finally {
+      setInstallPrompt(null);
+    }
   };
+
+  useEffect(() => {
+    if (!save.migrationNotice) return;
+    app.toast('保存データを更新しました。設定と用語は引き継がれています。');
+    app.dismissMigrationNotice();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [save.migrationNotice]);
+
+  const solvedIds = CASES.filter((c) => Boolean(save.results[c.id])).map((c) => c.id);
+  const solvedCount = solvedIds.length;
+  const solvedPlayableIds = PLAYABLE_CASES.filter((c) => Boolean(save.results[c.id])).map((c) => c.id);
+  const allClear = solvedCount === CASES.length;
+
+  const tutorialCase = CASES.find((c) => c.tutorial);
+  const tutorialSolved = Boolean(tutorialCase && save.results[tutorialCase.id]);
+  const today = allClear ? null : !tutorialSolved ? tutorialCase : firstUnsolvedCase(solvedPlayableIds);
+
+  const resumeEntry = Object.values(save.progress)
+    .filter((p) => p.phase !== 'intro')
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))[0];
+  const resumeCase = resumeEntry ? caseById(resumeEntry.caseId) : undefined;
+  const todayProgress = today ? save.progress[today.id] : undefined;
+  const todayHasProgress = Boolean(todayProgress && todayProgress.phase !== 'intro');
+
+  const openCase = (id: string) => {
+    sfx.tap();
+    app.go({ name: 'case', id });
+  };
+
+  const cta = today
+    ? todayHasProgress
+      ? todayProgress?.phase === 'result' || todayProgress?.phase === 'reveal'
+        ? '結果を見る'
+        : '捜査を続ける'
+      : today.tutorial
+        ? 'チュートリアルを始める'
+        : '捜査を開始する'
+    : '事件ファイルを見る';
+
   return (
-    <div class="screen title-screen">
-      <div class="masthead">
-        <span>No.001</span>
-        <span class="masthead-mid">STATS DETECTIVE</span>
-        <button class="icon-btn masthead-sound" aria-label={app.save.sound ? '音をオフ' : '音をオン'} onClick={app.toggleSound}>
-          {app.save.sound ? <IconSoundOn /> : <IconSoundOff />}
+    <div class="screen dx-screen dx-title">
+      <header class="masthead dx-masthead">
+        <span class="mono">VOL.1</span>
+        <span class="dx-masthead-mid mono">STATS DETECTIVE</span>
+        <button class="icon-btn masthead-sound" aria-label={save.settings.sound ? '音を消す' : '音を出す'} onClick={app.toggleSound}>
+          {save.settings.sound ? <IconSoundOn /> : <IconSoundOff />}
         </button>
-      </div>
+      </header>
 
-      <div class="grow col title-main">
-        <h1 class="headline">
-          <span class="headline-1">この数字、</span>
-          <span class="headline-2">
-            だれ<em>？</em>
-          </span>
-        </h1>
+      <div class="grow dx-title-main">
+        <div class="dx-title-copy">
+          <span class="dx-issue mono">事件ファイル / スマホ版</span>
+          <h1 class="dx-title-headline display">
+            この数字、<em>だれ？</em>
+          </h1>
+          <p class="dx-title-tagline">名前を知らなくても、数字は語る。</p>
+        </div>
 
-        <figure class="title-fig sheet">
-          <TitleArt />
-          <figcaption>
-            <b>図1</b> ある選手の、シーズンごとの得点。名前は伏せてある。
-          </figcaption>
-        </figure>
-
-        <p class="lede">
-          名前も顔も伏せられた<b>10人</b>の選手。
-          <br />
-          残された手がかりは、<span class="marker">数字だけ</span>だ。
-        </p>
-      </div>
-
-      <div class="actions title-actions">
-        <button class="btn btn-primary" onClick={start}>
-          {solved ? `捜査を続ける（${solved}/${PLAYERS.length} 解決）` : '捜査をはじめる'}
-        </button>
-        <div class="title-links">
-          <button
-            onClick={() => {
-              sfx.tap();
-              app.go({ name: 'howto', then: { name: 'title' } });
-            }}
-          >
-            遊び方
+        {today ? (
+          <button class="dx-today sheet" onClick={() => openCase(today.id)}>
+            <span class="dx-today-top">
+              <span class="kicker">{today.tutorial ? 'FIRST CASE' : "TODAY'S CASE"}</span>
+              <span class="dx-today-diff mono">
+                {today.tutorial ? 'TUTORIAL' : `FILE ${String(today.number).padStart(3, '0')} / ${today.difficulty.toUpperCase()}`}
+              </span>
+            </span>
+            <span class="dx-today-title display">{today.title}</span>
+            <span class="dx-today-sub">{today.subtitle}</span>
+            <span class="dx-today-hook">{today.hook}</span>
+            <span class="dx-today-meta mono">
+              容疑者 {today.suspectIds.length}人 / 手がかり {today.clues.length}枚 / 約{today.estimatedMinutes}分
+            </span>
+            <span class="dx-today-foot">
+              <span class="dx-today-cta">
+                {cta} <IconArrow />
+              </span>
+              {todayHasProgress && <span class="dx-today-save mono">AUTO SAVED</span>}
+            </span>
           </button>
-          <button
-            onClick={() => {
-              sfx.tap();
-              app.go({ name: 'glossary' });
-            }}
-          >
-            用語ノート <span class="mono">{app.save.terms.length}/{TERMS.length}</span>
+        ) : (
+          <button class="dx-today dx-today-cleared sheet" onClick={() => app.go({ name: 'board' })}>
+            <span class="dx-today-top">
+              <span class="kicker">ALL CLEAR</span>
+              <span class="dx-today-diff mono">VOL.1</span>
+            </span>
+            <span class="dx-today-title display">全事件、解決。</span>
+            <span class="dx-today-hook">事件ファイルを開けば、いつでも読み返せる。</span>
+            <span class="dx-today-foot">
+              <span class="dx-today-cta">
+                事件ファイルを見る <IconArrow />
+              </span>
+            </span>
           </button>
-          <button
-            onClick={() => {
-              sfx.tap();
-              app.go({ name: 'credits' });
-            }}
-          >
-            クレジット
+        )}
+
+        {!allClear && resumeCase && resumeCase.id !== today?.id && (
+          <button class="dx-resume-card" onClick={() => openCase(resumeCase.id)}>
+            <span class="dx-resume-tag mono">CONTINUE</span>
+            <span class="dx-resume-main">
+              <b>
+                {resumeCase.number ? `FILE ${String(resumeCase.number).padStart(3, '0')} ` : 'TUTORIAL '}
+                {resumeCase.title}
+              </b>
+              <small>
+                手がかり {resumeEntry.purchasedClueIds.length}枚 ・{' '}
+                {resumeEntry.phase === 'reveal' || resumeEntry.phase === 'result' ? '結果を見る' : '続きから'}
+              </small>
+            </span>
+            <IconArrow />
+          </button>
+        )}
+
+        <div class="dx-title-actions">
+          <button class="dx-title-link" onClick={() => app.go({ name: 'board' })}>
+            <span class="mono">CASE FILES</span>
+            <b>事件ファイル</b>
+            <small>{solvedCount}/{CASES.length} 解決</small>
+          </button>
+          <button class="dx-title-link" onClick={() => app.go({ name: 'howto' })}>
+            <span class="mono">BRIEFING</span>
+            <b>あそびかた</b>
+            <small>3分でわかる</small>
           </button>
         </div>
-      </div>
-    </div>
-  );
-}
 
-/** Printed career line (red ink) with the detective's pencil guess and a circled peak. */
-function TitleArt() {
-  // Fictional career (not one of the ten files) so the cover doesn't spoil anything.
-  const real = [3, 8, 12, 17, 14, 19, 22, 17, 23, 26, 20, 24, 27, 22, 18, 13, 15, 9, 6, 2];
-  const guess = [6, 9, 12, 14, 16, 17, 18, 19, 19, 20, 20, 19, 18, 17, 15, 13, 11, 9, 7, 5];
-  const X = (i: number) => 28 + i * 14;
-  const Y = (v: number) => 128 - v * 4;
-  const path = (vs: number[]) => vs.map((v, i) => `${i ? 'L' : 'M'}${X(i)} ${Y(v)}`).join('');
-  return (
-    <svg class="title-art" viewBox="0 0 320 150" aria-hidden="true">
-      <g class="ta-grid">
-        {Array.from({ length: 15 }, (_, i) => (
-          <line key={`v${i}`} x1={20 + i * 20} x2={20 + i * 20} y1={12} y2={130} />
-        ))}
-        {Array.from({ length: 6 }, (_, i) => (
-          <line key={`h${i}`} x1={20} x2={300} y1={10 + i * 24} y2={10 + i * 24} />
-        ))}
-      </g>
-      <line x1={20} x2={302} y1={128} y2={128} class="ta-axis" />
-      <line x1={20} x2={20} y1={8} y2={128} class="ta-axis" />
-      <path d={path(guess)} class="ta-guess" filter="url(#pencil)" />
-      <path d={path(real)} class="ta-real" pathLength={1} />
-      {real.map((v, i) => (
-        <circle key={i} cx={X(i)} cy={Y(v)} r={2.4} class="ta-dot" style={{ animationDelay: `${0.25 + i * 0.05}s` }} />
-      ))}
-      <g class="ta-note">
-        <ellipse cx={X(12)} cy={Y(27)} rx={15} ry={11} class="ta-circle" pathLength={1} />
-        <path d={`M${X(12) + 14} ${Y(27) - 4} q 16 -8 28 -2`} class="ta-arrow" pathLength={1} />
-        <text x={X(12) + 46} y={Y(27) - 1} class="ta-hand">
-          ピーク？
-        </text>
-      </g>
-    </svg>
+        {installPrompt && !installed && (
+          <button class="dx-install" onClick={install}>
+            <span class="dx-install-mark mono">INSTALL</span>
+            <span class="dx-install-copy">
+              <b>ホーム画面に追加</b>
+              <small>オフラインでも遊べる</small>
+            </span>
+            <IconArrow />
+          </button>
+        )}
+
+        <div class="dx-home-progress">
+          <span class="kicker">INVESTIGATION LOG</span>
+          <div class="dx-dots" aria-label={`${solvedCount}/${CASES.length}事件を解決`}>
+            {CASES.map((c) => (
+              <span
+                key={c.id}
+                class={`dx-dot ${save.results[c.id] ? 'is-done' : c.id === today?.id ? 'is-next' : ''}`}
+              >
+                {c.tutorial ? 'T' : c.number}
+              </span>
+            ))}
+          </div>
+          <b class="mono">{solvedCount}/{CASES.length}</b>
+        </div>
+      </div>
+
+      <footer class="dx-title-foot">
+        <button onClick={() => app.go({ name: 'glossary' })}>用語ノート</button>
+        <span aria-hidden="true">·</span>
+        <button onClick={() => app.go({ name: 'credits' })}>クレジット</button>
+        <span aria-hidden="true">·</span>
+        <button onClick={() => setSettingsOpen(true)}>設定</button>
+      </footer>
+
+      {settingsOpen && (
+        <Modal
+          kicker="SETTINGS"
+          title="設定"
+          onClose={() => {
+            setSettingsOpen(false);
+            setConfirmReset(false);
+          }}
+          footer={
+            <button
+              class="btn btn-primary"
+              onClick={() => {
+                setSettingsOpen(false);
+                setConfirmReset(false);
+              }}
+            >
+              閉じる
+            </button>
+          }
+        >
+          <div class="dx-settings">
+            <label class="dx-toggle">
+              <span>
+                <b>効果音</b>
+                <small>タイプライターと判子の音</small>
+              </span>
+              <input
+                type="checkbox"
+                checked={save.settings.sound}
+                onChange={() => {
+                  sfx.tap();
+                  app.toggleSound();
+                }}
+              />
+            </label>
+            <label class="dx-toggle">
+              <span>
+                <b>推理アシスト</b>
+                <small>手がかりを買うと、矛盾する容疑者を自動で×にする</small>
+              </span>
+              <input
+                type="checkbox"
+                checked={save.settings.assist}
+                onChange={() => {
+                  sfx.tap();
+                  app.setSetting('assist', !save.settings.assist);
+                }}
+              />
+            </label>
+          </div>
+
+          <div class="dx-danger">
+            <span class="kicker">RESET</span>
+            {confirmReset ? (
+              <>
+                <p>解決記録・用語ノート・設定をすべて消します。元に戻せません。</p>
+                <div class="dx-btn-row">
+                  <button class="btn btn-ghost" onClick={() => setConfirmReset(false)}>
+                    やめる
+                  </button>
+                  <button
+                    class="btn btn-primary"
+                    onClick={() => {
+                      app.resetGameData();
+                      setSettingsOpen(false);
+                      setConfirmReset(false);
+                    }}
+                  >
+                    すべて消す
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <p>セーブデータを最初からやり直す。</p>
+                <button class="btn btn-ghost" onClick={() => setConfirmReset(true)}>
+                  データをリセット
+                </button>
+              </>
+            )}
+          </div>
+        </Modal>
+      )}
+    </div>
   );
 }
